@@ -1,0 +1,1959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Study Companion</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Caveat:wght@600;700&display=swap');
+
+:root{
+  --ink: #4a2140;
+  --ink-soft: #8a6178;
+  --paper: #fbeef1;
+  --paper-dim: #f5dde3;
+  --chalk: #fff8f9;
+  --board: #431c3a;
+  --board-dark: #2c1026;
+  --brass: #d98a9c;
+  --brass-soft: #f0c2cc;
+  --coral: #d43d6b;
+  --sage: #c97b95;
+  --line: rgba(74,33,64,0.14);
+  --radius: 10px;
+  --tag-1: #c97b95;
+  --tag-2: #a55b8f;
+  --tag-3: #e08a9e;
+  --tag-4: #d43d6b;
+  --tag-5: #b6547e;
+  --tag-6: #8a4a6b;
+}
+
+*{box-sizing:border-box;}
+html{ scrollbar-gutter: stable; overflow-y: scroll; }
+html,body{margin:0;padding:0;}
+body{
+  background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzODAiIGhlaWdodD0iNDYwIiB2aWV3Qm94PSIwIDAgMzgwIDQ2MCI+CjxkZWZzPgogIDxwYXRoIGlkPSJwZXRhbCIgZD0iTTAsMCBDIC03LC05IC04LC0yMSAwLC0zMCBDIDgsLTIxIDcsLTkgMCwwIFoiLz4KICA8cGF0aCBpZD0icGV0YWxTbSIgZD0iTTAsMCBDIC00LC01IC01LC0xMyAwLC0xOSBDIDUsLTEzIDQsLTUgMCwwIFoiLz4KICA8cGF0aCBpZD0ibGVhZiIgZD0iTTAsMCBDIC0zLC05IC0zLC0yMiAwLC0zNCBDIDEwLC0yNCAxMiwtMTAgMCwwIFoiLz4KICA8ZyBpZD0iYmxvb21CaWciPgogICAgPGcgZmlsbD0iI2ZlZjhmOSIgc3Ryb2tlPSIjZWZkMmRhIiBzdHJva2Utd2lkdGg9IjAuNTUiIG9wYWNpdHk9IjAuNDgiPgogICAgICA8dXNlIGhyZWY9IiNwZXRhbCIgdHJhbnNmb3JtPSJyb3RhdGUoMCkgdHJhbnNsYXRlKDAsLTI0KSIvPgogICAgICA8dXNlIGhyZWY9IiNwZXRhbCIgdHJhbnNmb3JtPSJyb3RhdGUoMzApIHRyYW5zbGF0ZSgwLC0yNCkiLz4KICAgICAgPHVzZSBocmVmPSIjcGV0YWwiIHRyYW5zZm9ybT0icm90YXRlKDYwKSB0cmFuc2xhdGUoMCwtMjQpIi8+CiAgICAgIDx1c2UgaHJlZj0iI3BldGFsIiB0cmFuc2Zvcm09InJvdGF0ZSg5MCkgdHJhbnNsYXRlKDAsLTI0KSIvPgogICAgICA8dXNlIGhyZWY9IiNwZXRhbCIgdHJhbnNmb3JtPSJyb3RhdGUoMTIwKSB0cmFuc2xhdGUoMCwtMjQpIi8+CiAgICAgIDx1c2UgaHJlZj0iI3BldGFsIiB0cmFuc2Zvcm09InJvdGF0ZSgxNTApIHRyYW5zbGF0ZSgwLC0yNCkiLz4KICAgICAgPHVzZSBocmVmPSIjcGV0YWwiIHRyYW5zZm9ybT0icm90YXRlKDE4MCkgdHJhbnNsYXRlKDAsLTI0KSIvPgogICAgICA8dXNlIGhyZWY9IiNwZXRhbCIgdHJhbnNmb3JtPSJyb3RhdGUoMjEwKSB0cmFuc2xhdGUoMCwtMjQpIi8+CiAgICAgIDx1c2UgaHJlZj0iI3BldGFsIiB0cmFuc2Zvcm09InJvdGF0ZSgyNDApIHRyYW5zbGF0ZSgwLC0yNCkiLz4KICAgICAgPHVzZSBocmVmPSIjcGV0YWwiIHRyYW5zZm9ybT0icm90YXRlKDI3MCkgdHJhbnNsYXRlKDAsLTI0KSIvPgogICAgICA8dXNlIGhyZWY9IiNwZXRhbCIgdHJhbnNmb3JtPSJyb3RhdGUoMzAwKSB0cmFuc2xhdGUoMCwtMjQpIi8+CiAgICAgIDx1c2UgaHJlZj0iI3BldGFsIiB0cmFuc2Zvcm09InJvdGF0ZSgzMzApIHRyYW5zbGF0ZSgwLC0yNCkiLz4KICAgIDwvZz4KICAgIDxnIGZpbGw9IiNmZWY4ZjkiIHN0cm9rZT0iI2VmZDJkYSIgc3Ryb2tlLXdpZHRoPSIwLjUiIG9wYWNpdHk9IjAuNSI+CiAgICAgIDx1c2UgaHJlZj0iI3BldGFsIiB0cmFuc2Zvcm09InJvdGF0ZSgxNSkgdHJhbnNsYXRlKDAsLTEzKSBzY2FsZSgwLjcyKSIvPgogICAgICA8dXNlIGhyZWY9IiNwZXRhbCIgdHJhbnNmb3JtPSJyb3RhdGUoNTEpIHRyYW5zbGF0ZSgwLC0xMykgc2NhbGUoMC43MikiLz4KICAgICAgPHVzZSBocmVmPSIjcGV0YWwiIHRyYW5zZm9ybT0icm90YXRlKDg3KSB0cmFuc2xhdGUoMCwtMTMpIHNjYWxlKDAuNzIpIi8+CiAgICAgIDx1c2UgaHJlZj0iI3BldGFsIiB0cmFuc2Zvcm09InJvdGF0ZSgxMjMpIHRyYW5zbGF0ZSgwLC0xMykgc2NhbGUoMC43MikiLz4KICAgICAgPHVzZSBocmVmPSIjcGV0YWwiIHRyYW5zZm9ybT0icm90YXRlKDE1OSkgdHJhbnNsYXRlKDAsLTEzKSBzY2FsZSgwLjcyKSIvPgogICAgICA8dXNlIGhyZWY9IiNwZXRhbCIgdHJhbnNmb3JtPSJyb3RhdGUoMTk1KSB0cmFuc2xhdGUoMCwtMTMpIHNjYWxlKDAuNzIpIi8+CiAgICAgIDx1c2UgaHJlZj0iI3BldGFsIiB0cmFuc2Zvcm09InJvdGF0ZSgyMzEpIHRyYW5zbGF0ZSgwLC0xMykgc2NhbGUoMC43MikiLz4KICAgICAgPHVzZSBocmVmPSIjcGV0YWwiIHRyYW5zZm9ybT0icm90YXRlKDI2NykgdHJhbnNsYXRlKDAsLTEzKSBzY2FsZSgwLjcyKSIvPgogICAgICA8dXNlIGhyZWY9IiNwZXRhbCIgdHJhbnNmb3JtPSJyb3RhdGUoMzAzKSB0cmFuc2xhdGUoMCwtMTMpIHNjYWxlKDAuNzIpIi8+CiAgICAgIDx1c2UgaHJlZj0iI3BldGFsIiB0cmFuc2Zvcm09InJvdGF0ZSgzMzkpIHRyYW5zbGF0ZSgwLC0xMykgc2NhbGUoMC43MikiLz4KICAgIDwvZz4KICAgIDxjaXJjbGUgcj0iNC41IiBmaWxsPSIjZmJlOGVlIiBzdHJva2U9IiNlZmQyZGEiIHN0cm9rZS13aWR0aD0iMC41Ii8+CiAgPC9nPgogIDxnIGlkPSJibG9vbVNtIj4KICAgIDxnIGZpbGw9IiNmZWY4ZjkiIHN0cm9rZT0iI2VmZDJkYSIgc3Ryb2tlLXdpZHRoPSIwLjUiIG9wYWNpdHk9IjAuNDgiPgogICAgICA8dXNlIGhyZWY9IiNwZXRhbFNtIiB0cmFuc2Zvcm09InJvdGF0ZSgwKSB0cmFuc2xhdGUoMCwtMTQpIi8+CiAgICAgIDx1c2UgaHJlZj0iI3BldGFsU20iIHRyYW5zZm9ybT0icm90YXRlKDQ1KSB0cmFuc2xhdGUoMCwtMTQpIi8+CiAgICAgIDx1c2UgaHJlZj0iI3BldGFsU20iIHRyYW5zZm9ybT0icm90YXRlKDkwKSB0cmFuc2xhdGUoMCwtMTQpIi8+CiAgICAgIDx1c2UgaHJlZj0iI3BldGFsU20iIHRyYW5zZm9ybT0icm90YXRlKDEzNSkgdHJhbnNsYXRlKDAsLTE0KSIvPgogICAgICA8dXNlIGhyZWY9IiNwZXRhbFNtIiB0cmFuc2Zvcm09InJvdGF0ZSgxODApIHRyYW5zbGF0ZSgwLC0xNCkiLz4KICAgICAgPHVzZSBocmVmPSIjcGV0YWxTbSIgdHJhbnNmb3JtPSJyb3RhdGUoMjI1KSB0cmFuc2xhdGUoMCwtMTQpIi8+CiAgICAgIDx1c2UgaHJlZj0iI3BldGFsU20iIHRyYW5zZm9ybT0icm90YXRlKDI3MCkgdHJhbnNsYXRlKDAsLTE0KSIvPgogICAgICA8dXNlIGhyZWY9IiNwZXRhbFNtIiB0cmFuc2Zvcm09InJvdGF0ZSgzMTUpIHRyYW5zbGF0ZSgwLC0xNCkiLz4KICAgIDwvZz4KICAgIDxjaXJjbGUgcj0iMyIgZmlsbD0iI2ZiZThlZSIgc3Ryb2tlPSIjZWZkMmRhIiBzdHJva2Utd2lkdGg9IjAuNDUiLz4KICA8L2c+CiAgPGcgaWQ9ImxlYWZQYWlyIiBmaWxsPSIjZjdlNWVhIiBzdHJva2U9IiNlZmQyZGEiIHN0cm9rZS13aWR0aD0iMC40NSIgb3BhY2l0eT0iMC40Ij4KICAgIDx1c2UgaHJlZj0iI2xlYWYiIHRyYW5zZm9ybT0icm90YXRlKC0yNSkiLz4KICAgIDx1c2UgaHJlZj0iI2xlYWYiIHRyYW5zZm9ybT0icm90YXRlKDI1KSBzY2FsZSgwLjg1KSIvPgogIDwvZz4KICA8ZyBpZD0iYnVkIj4KICAgIDx1c2UgaHJlZj0iI3BldGFsU20iIGZpbGw9IiNmYmU4ZWUiIHN0cm9rZT0iI2VmZDJkYSIgc3Ryb2tlLXdpZHRoPSIwLjUiIHRyYW5zZm9ybT0ic2NhbGUoMS4xKSIvPgogICAgPHVzZSBocmVmPSIjbGVhZiIgZmlsbD0iI2Y3ZTVlYSIgc3Ryb2tlPSIjZWZkMmRhIiBzdHJva2Utd2lkdGg9IjAuNCIgdHJhbnNmb3JtPSJyb3RhdGUoMTYwKSBzY2FsZSgwLjYpIHRyYW5zbGF0ZSgwLDQpIi8+CiAgPC9nPgo8L2RlZnM+Cgo8cmVjdCB3aWR0aD0iMzgwIiBoZWlnaHQ9IjQ2MCIgZmlsbD0iI2ZlZjlmYSIvPgoKPGcgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZjFkNmRlIiBzdHJva2Utd2lkdGg9IjAuODUiIG9wYWNpdHk9IjAuMjgiPgogIDxwYXRoIGQ9Ik0gLTIwIDkwIEMgMzAgNjAsIDQwIDEzMCwgOTAgMTEwIEMgMTQwIDkwLCAxNTAgNDAsIDIwMCA1NSBDIDI1MCA3MCwgMjUwIDEzMCwgMzAwIDExNSBDIDM0MCAxMDMsIDM2MCA3MCwgNDAwIDg1Ii8+CiAgPHBhdGggZD0iTSAtMjAgMjYwIEMgMjAgMjMwLCA2MCAzMDAsIDExMCAyNzUgQyAxNTUgMjUzLCAxNTAgMzIwLCAyMDUgMzAwIEMgMjUwIDI4NCwgMjYwIDI0MCwgMzAwIDI1NSBDIDMzNSAyNjgsIDM2MCAzMDAsIDQwMCAyODAiLz4KICA8cGF0aCBkPSJNIC0yMCA0MDAgQyAzMCAzNzUsIDU1IDQzMCwgMTAwIDQwNSBDIDE0NSAzODIsIDE2MCA0NDAsIDIxMCA0MTggQyAyNTUgMzk4LCAyNzAgNDQ1LCAzMjAgNDI1IEMgMzU1IDQxMSwgMzcwIDM5MCwgNDAwIDQwMCIvPgogIDxwYXRoIGQ9Ik0gNjAgMTEwIEMgNDUgMTUwLCA0MCAxOTAsIDY1IDIyNSIvPgogIDxwYXRoIGQ9Ik0gMjEwIDYwIEMgMjIwIDEwMCwgMjE1IDE0MCwgMjM1IDE3NSIvPgogIDxwYXRoIGQ9Ik0gMTE1IDI4MCBDIDEwMCAzMTUsIDEwNSAzNTAsIDEyNSAzODUiLz4KICA8cGF0aCBkPSJNIDMwNSAyNjAgQyAzMTUgMzAwLCAzMDUgMzQwLCAzMjAgMzc1Ii8+CjwvZz4KCjx1c2UgaHJlZj0iI2xlYWZQYWlyIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg2MCwxMDApIHJvdGF0ZSgxMCkiLz4KPHVzZSBocmVmPSIjYmxvb21CaWciIHRyYW5zZm9ybT0idHJhbnNsYXRlKDY1LDExMCkiLz4KCjx1c2UgaHJlZj0iI2xlYWZQYWlyIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyMTUsNjApIHJvdGF0ZSgtMTUpIHNjYWxlKDAuOSkiLz4KPHVzZSBocmVmPSIjYmxvb21CaWciIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIxMCw1OCkgc2NhbGUoMC44NSkiLz4KCjx1c2UgaHJlZj0iI2xlYWZQYWlyIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzMDAsMTIwKSByb3RhdGUoMzApIHNjYWxlKDAuOCkiLz4KPHVzZSBocmVmPSIjYmxvb21TbSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzAwLDExOCkiLz4KCjx1c2UgaHJlZj0iI2J1ZCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTU1LDE1MCkgcm90YXRlKDEwKSIvPgo8dXNlIGhyZWY9IiNidWQiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM1LDE2NSkgcm90YXRlKC0yMCkgc2NhbGUoMC45KSIvPgoKPHVzZSBocmVmPSIjbGVhZlBhaXIiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDExMCwyODApIHJvdGF0ZSgtMTApIHNjYWxlKDAuOTUpIi8+Cjx1c2UgaHJlZj0iI2Jsb29tQmlnIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxMTIsMjc4KSBzY2FsZSgwLjkpIi8+Cgo8dXNlIGhyZWY9IiNsZWFmUGFpciIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjA1LDMwMCkgcm90YXRlKDIwKSBzY2FsZSgwLjg1KSIvPgo8dXNlIGhyZWY9IiNibG9vbVNtIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyMDMsMzAwKSIvPgoKPHVzZSBocmVmPSIjbGVhZlBhaXIiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDMwMCwyNTgpIHJvdGF0ZSgtMjUpIHNjYWxlKDAuOSkiLz4KPHVzZSBocmVmPSIjYmxvb21CaWciIHRyYW5zZm9ybT0idHJhbnNsYXRlKDI5OCwyNTYpIHNjYWxlKDAuOCkiLz4KCjx1c2UgaHJlZj0iI2J1ZCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjAsMjU1KSByb3RhdGUoMTUpIHNjYWxlKDAuODUpIi8+Cjx1c2UgaHJlZj0iI2J1ZCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjU1LDMwMCkgcm90YXRlKC0xMCkgc2NhbGUoMC44KSIvPgoKPHVzZSBocmVmPSIjbGVhZlBhaXIiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDEwMCw0MDUpIHJvdGF0ZSgxNSkgc2NhbGUoMC44NSkiLz4KPHVzZSBocmVmPSIjYmxvb21CaWciIHRyYW5zZm9ybT0idHJhbnNsYXRlKDEwMCw0MDMpIHNjYWxlKDAuNzUpIi8+Cgo8dXNlIGhyZWY9IiNsZWFmUGFpciIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjEwLDQyMCkgcm90YXRlKC0yMCkgc2NhbGUoMC45KSIvPgo8dXNlIGhyZWY9IiNibG9vbVNtIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyMTAsNDE4KSBzY2FsZSgxLjEpIi8+Cgo8dXNlIGhyZWY9IiNsZWFmUGFpciIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIwLDQyNSkgcm90YXRlKDEwKSBzY2FsZSgwLjc1KSIvPgo8dXNlIGhyZWY9IiNibG9vbVNtIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzMjAsNDI0KSIvPgoKPHVzZSBocmVmPSIjYnVkIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxNjAsNDM1KSByb3RhdGUoLTE1KSBzY2FsZSgwLjgpIi8+Cjx1c2UgaHJlZj0iI2J1ZCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzcwLDkwKSByb3RhdGUoMjApIHNjYWxlKDAuODUpIi8+Cgo8IS0tIGVkZ2Utd3JhcCBkdXBsaWNhdGVzIGZvciB0aWxpbmcgY29udGludWl0eSAtLT4KPHVzZSBocmVmPSIjYmxvb21TbSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTIwLDIwKSBzY2FsZSgwLjgpIi8+Cjx1c2UgaHJlZj0iI2Jsb29tU20iIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM2MCw0NDApIHNjYWxlKDAuOCkiLz4KPHVzZSBocmVmPSIjbGVhZlBhaXIiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAsNDQwKSByb3RhdGUoNSkgc2NhbGUoMC43KSIvPgo8L3N2Zz4K") repeat;
+  background-size: 380px 460px;
+  color:var(--ink);
+  font-family:'Work Sans', sans-serif;
+  min-height:100vh;
+}
+
+.app{
+  max-width:1180px;
+  margin:0 auto;
+  padding:28px 24px 80px;
+}
+
+/* ---------- HERO / CHALKBOARD ---------- */
+.board{
+  background:
+    radial-gradient(ellipse at 20% 10%, rgba(255,255,255,0.04), transparent 50%),
+    radial-gradient(ellipse at 80% 90%, rgba(255,255,255,0.03), transparent 50%),
+    linear-gradient(180deg, var(--board) 0%, var(--board-dark) 100%);
+  border-radius: 14px;
+  padding: 26px 30px;
+  color: var(--chalk);
+  position:relative;
+  overflow:hidden;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.06) inset, 0 12px 30px -14px rgba(0,0,0,0.5);
+  border: 6px solid #5c2a4d;
+  border-image: linear-gradient(135deg,#6e3560,#3c1836) 1;
+}
+.board::before{
+  content:"";
+  position:absolute; inset:0;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.015) 0px, transparent 1px, transparent 3px),
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.01) 0px, transparent 1px, transparent 4px);
+  pointer-events:none;
+}
+.board-top{
+  display:flex; justify-content:space-between; align-items:flex-start; gap:20px; flex-wrap:wrap;
+  position:relative; z-index:1;
+}
+.board-top > div:first-child{
+  flex: 1 1 260px;
+  min-width: 0;
+}
+.board-eyebrow{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:11px;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color: var(--brass-soft);
+  margin:0 0 6px;
+}
+.board-title{
+  font-family:'Caveat', cursive;
+  font-weight:700;
+  font-size: clamp(28px, 4vw, 44px);
+  line-height:1.15;
+  margin:0;
+  color:#fdf2f4;
+  text-shadow: 0 0 1px rgba(255,255,255,0.15);
+}
+.board-sub{
+  font-family:'Work Sans';
+  font-size:14px;
+  color: rgba(247,244,236,0.65);
+  margin-top:8px;
+  max-width:420px;
+}
+.next-deadline{
+  text-align:right;
+  min-width:200px;
+}
+.next-deadline .label{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:10.5px;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color: rgba(247,244,236,0.55);
+}
+.next-deadline .count{
+  font-family:'Fraunces', serif;
+  font-weight:700;
+  font-size:38px;
+  color: var(--brass-soft);
+  line-height:1.1;
+  margin-top:2px;
+}
+.next-deadline .count small{
+  font-size:15px;
+  font-weight:500;
+  color: rgba(247,244,236,0.6);
+  margin-left:4px;
+}
+.next-deadline .what{
+  font-family:'Caveat', cursive;
+  font-size:20px;
+  color:#f4dde3;
+  margin-top:2px;
+}
+.next-deadline .none{
+  font-family:'Work Sans';
+  font-size:13px;
+  color:rgba(247,244,236,0.5);
+  margin-top:8px;
+}
+
+/* ---------- MOOD CHECK-IN + STREAK ---------- */
+.board-bottom{
+  position: relative; z-index: 1;
+  display:flex; align-items:center; justify-content:space-between;
+  gap:16px; flex-wrap:wrap;
+  margin-top:20px;
+  padding-top:16px;
+  border-top: 1px solid rgba(247,244,236,0.12);
+}
+.mood-check{
+  display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+}
+.mood-label{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:11px;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  color: rgba(247,244,236,0.55);
+}
+.mood-options{ display:flex; gap:6px; }
+.mood-btn{
+  width:32px; height:32px;
+  border-radius:50%;
+  border:1px solid rgba(247,244,236,0.18);
+  background: rgba(247,244,236,0.06);
+  font-size:16px;
+  cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+.mood-btn:hover{ transform: translateY(-2px) scale(1.08); background: rgba(247,244,236,0.12); }
+.mood-btn:active{ transform: translateY(0) scale(0.94); }
+.mood-btn.selected{
+  background: var(--brass-soft);
+  border-color: var(--brass-soft);
+  transform: scale(1.1);
+}
+.streak-badge{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:12.5px;
+  color: rgba(247,244,236,0.75);
+  display:flex; align-items:center; gap:6px;
+  white-space:nowrap;
+}
+.streak-badge .flame{ font-size:15px; }
+.streak-badge strong{ color: var(--brass-soft); font-weight:600; }
+
+/* ---------- LAYOUT ---------- */
+.layout{
+  display:grid;
+  grid-template-columns: 220px 1fr;
+  gap: 22px;
+  margin-top: 26px;
+}
+@media (max-width: 760px){
+  .layout{ grid-template-columns: 1fr; }
+}
+
+/* Sidebar */
+.side-column{
+  display:flex; flex-direction:column; gap:22px;
+}
+.sidebar{
+  background: var(--chalk);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 16px;
+  align-self:start;
+}
+.sidebar h2{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:11px;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color: var(--ink-soft);
+  margin: 0 0 12px;
+}
+.subject-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:4px;}
+.subject-item{
+  display:flex; align-items:center; gap:9px;
+  padding:8px 9px;
+  border-radius:7px;
+  cursor:pointer;
+  font-size:14px;
+  color: var(--ink);
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+.subject-item:hover{ background: var(--paper-dim); transform: translateX(2px); }
+.subject-item:active{ transform: translateX(2px) scale(0.98); }
+.subject-item.active{ background: var(--ink); color: var(--chalk); }
+.subject-item.active:hover{ background: #612a53; }
+.dot{ width:9px; height:9px; border-radius:50%; flex-shrink:0; }
+.subject-item .name{ flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.subject-item .count{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:11px;
+  opacity:0.6;
+}
+.add-subject{
+  margin-top:10px;
+  display:flex; gap:6px;
+}
+.add-subject input[type=text]{
+  flex:1; min-width:0;
+  border:1px dashed var(--line);
+  background:transparent;
+  border-radius:6px;
+  padding:7px 8px;
+  font-family:'Work Sans';
+  font-size:13px;
+  color:var(--ink);
+}
+.color-swatches{ display:flex; gap:5px; margin-top:8px; flex-wrap:wrap; }
+.swatch{
+  width:18px;height:18px;border-radius:50%;cursor:pointer;border:2px solid transparent;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.swatch:hover{ transform: scale(1.18); box-shadow: 0 2px 6px rgba(74,33,64,0.25); }
+.swatch:active{ transform: scale(0.95); }
+.swatch.selected{ border-color: var(--ink); transform: scale(1.1); }
+.btn{
+  font-family:'Work Sans'; font-weight:600; font-size:13px;
+  border:none; border-radius:7px; padding:8px 12px; cursor:pointer;
+  background: var(--ink); color: var(--chalk);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  box-shadow: 0 1px 2px rgba(74,33,64,0.15);
+}
+.btn:hover{ background: #612a53; box-shadow: 0 4px 10px rgba(74,33,64,0.22); transform: translateY(-1px); }
+.btn:active{ transform: translateY(0) scale(0.97); box-shadow: 0 1px 2px rgba(74,33,64,0.18); }
+.btn.small{ padding:6px 10px; font-size:12px; }
+.btn.ghost{
+  background:transparent; color:var(--ink); border:1px solid var(--line);
+  box-shadow:none;
+}
+.btn.ghost:hover{ background: var(--paper-dim); box-shadow:none; }
+.btn.danger{ background: var(--coral); color:#fff; }
+.btn.danger:hover{ background:#bf3160; }
+.btn-full{ width:100%; margin-top:8px; }
+
+/* ---------- TODAY'S LETTER ---------- */
+.letter-panel{
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.5), rgba(255,255,255,0) 30%),
+    var(--chalk);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px 18px 16px;
+  position: relative;
+  overflow: visible;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.6) inset, 0 6px 16px -10px rgba(74,33,64,0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.letter-panel:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.6) inset, 0 12px 24px -12px rgba(74,33,64,0.3);
+}
+.letter-seal{
+  position:absolute;
+  top:-14px; right:16px;
+  width:34px; height:34px;
+  border-radius:50%;
+  background: radial-gradient(circle at 32% 28%, var(--brass-soft), var(--brass) 75%);
+  box-shadow: 0 3px 6px rgba(74,33,64,0.3), inset 0 0 0 1px rgba(255,255,255,0.3);
+  display:flex; align-items:center; justify-content:center;
+  color:#fff;
+  font-size:15px;
+  transform: rotate(-8deg);
+}
+.letter-panel h2{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:11px;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color: var(--ink-soft);
+  margin: 0 0 2px;
+}
+.letter-date{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:11px;
+  color: var(--ink-soft);
+  opacity:0.75;
+  margin: 0 0 12px;
+}
+.letter-body{
+  font-family:'Fraunces', serif;
+  font-style: italic;
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: var(--ink);
+  margin: 0;
+  position:relative;
+  padding-left: 14px;
+  border-left: 2px solid var(--brass-soft);
+}
+.letter-sign{
+  font-family:'Caveat', cursive;
+  font-weight:600;
+  font-size: 21px;
+  color: var(--ink);
+  text-align:right;
+  margin: 10px 0 0;
+}
+
+.letter-panel.is-special{
+  border-color: var(--brass);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.6) inset, 0 0 0 2px rgba(217,138,156,0.35), 0 10px 22px -12px rgba(74,33,64,0.35);
+}
+.letter-panel.is-special .letter-seal{
+  background: radial-gradient(circle at 32% 28%, #fff2d6, var(--brass) 75%);
+}
+
+.letter-special-toggle{
+  display:block;
+  margin-top:12px;
+  background:none;
+  border:none;
+  padding:0;
+  font-family:'IBM Plex Mono', monospace;
+  font-size:11px;
+  letter-spacing:0.04em;
+  color: var(--ink-soft);
+  cursor:pointer;
+  text-decoration: underline dotted;
+  text-underline-offset:3px;
+  transition: color 0.15s ease;
+}
+.letter-special-toggle:hover{ color: var(--ink); }
+
+.special-form{
+  margin-top:10px;
+  padding-top:10px;
+  border-top:1px dashed var(--line);
+  display:flex; flex-direction:column; gap:8px;
+}
+.special-form .field label{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:9.5px; letter-spacing:0.06em; text-transform:uppercase; color:var(--ink-soft);
+}
+.special-form textarea{ min-height:56px; font-size:13px; }
+.special-recurring{
+  display:flex; align-items:center; gap:6px;
+  font-family:'Work Sans'; font-size:12.5px; color:var(--ink-soft);
+  cursor:pointer;
+}
+.special-form-actions{ display:flex; gap:8px; margin-top:2px; }
+
+.special-list{
+  list-style:none; margin:10px 0 0; padding:0;
+  display:flex; flex-direction:column; gap:5px;
+}
+.special-list li{
+  display:flex; align-items:center; justify-content:space-between; gap:6px;
+  font-size:12px; color:var(--ink-soft);
+  background: var(--paper);
+  border-radius:6px;
+  padding:5px 8px;
+}
+.special-list .sp-info{ overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+
+/* Main */
+.main{ display:flex; flex-direction:column; gap:22px; }
+
+.search-row{ display:block; }
+.search-row input{ width:100%; padding:10px 12px; font-size:14px; }
+
+.tabs{ display:flex; gap:6px; }
+.tab{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:12px;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  padding:8px 14px;
+  border-radius:999px;
+  cursor:pointer;
+  border:1px solid var(--line);
+  color:var(--ink-soft);
+  background: var(--chalk);
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.tab:hover{ border-color: var(--sage); color: var(--ink); transform: translateY(-1px); }
+.tab:active{ transform: translateY(0) scale(0.96); }
+.tab.active{ background: var(--ink); color: var(--chalk); border-color:var(--ink); }
+.tab.active:hover{ transform: translateY(-1px); }
+
+.panel{
+  background: var(--chalk);
+  border:1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px;
+  transform-style: preserve-3d;
+  position: relative;
+}
+.panel.page-turn-forward{
+  transform-origin: left center;
+  animation: pageTurnForward 0.85s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+.panel.page-turn-backward{
+  transform-origin: right center;
+  animation: pageTurnBackward 0.85s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+.panel.page-turn-forward::after,
+.panel.page-turn-backward::after{
+  content:"";
+  position:absolute; inset:0;
+  border-radius: inherit;
+  pointer-events:none;
+}
+.panel.page-turn-forward::after{
+  background: linear-gradient(90deg, rgba(74,33,64,0.28), rgba(74,33,64,0) 55%);
+  animation: pageTurnShadow 0.85s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.panel.page-turn-backward::after{
+  background: linear-gradient(270deg, rgba(74,33,64,0.28), rgba(74,33,64,0) 55%);
+  animation: pageTurnShadow 0.85s cubic-bezier(0.4, 0, 0.2, 1);
+}
+@keyframes pageTurnForward{
+  0%{
+    transform: perspective(1800px) rotateY(-85deg);
+    border-top-right-radius: 52px;
+    border-bottom-right-radius: 52px;
+    opacity: 0;
+  }
+  45%{
+    transform: perspective(1800px) rotateY(-32deg);
+    border-top-right-radius: 26px;
+    border-bottom-right-radius: 26px;
+    opacity: 1;
+  }
+  100%{
+    transform: perspective(1800px) rotateY(0deg);
+    border-top-right-radius: var(--radius);
+    border-bottom-right-radius: var(--radius);
+    opacity: 1;
+  }
+}
+@keyframes pageTurnBackward{
+  0%{
+    transform: perspective(1800px) rotateY(85deg);
+    border-top-left-radius: 52px;
+    border-bottom-left-radius: 52px;
+    opacity: 0;
+  }
+  45%{
+    transform: perspective(1800px) rotateY(32deg);
+    border-top-left-radius: 26px;
+    border-bottom-left-radius: 26px;
+    opacity: 1;
+  }
+  100%{
+    transform: perspective(1800px) rotateY(0deg);
+    border-top-left-radius: var(--radius);
+    border-bottom-left-radius: var(--radius);
+    opacity: 1;
+  }
+}
+@keyframes pageTurnShadow{
+  0%{ opacity: 1; }
+  100%{ opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce){
+  .panel.page-turn-forward, .panel.page-turn-backward{ animation: none; }
+  .panel.page-turn-forward::after, .panel.page-turn-backward::after{ animation: none; content: none; }
+}
+.panel-head{ display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:14px; flex-wrap:wrap;}
+.panel-head h3{
+  font-family:'Fraunces', serif;
+  font-weight:600;
+  font-size:20px;
+  margin:0;
+}
+
+/* Deadlines */
+.deadline-form, .note-form{
+  display:grid; gap:8px;
+  grid-template-columns: 1.6fr 1fr 1fr auto;
+  align-items:end;
+  margin-bottom:16px;
+  padding-bottom:16px;
+  border-bottom:1px dashed var(--line);
+}
+@media (max-width:640px){ .deadline-form, .note-form{ grid-template-columns:1fr; } }
+.field{ display:flex; flex-direction:column; gap:4px; }
+.field label{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-soft);
+}
+input[type=text], input[type=date], select, textarea{
+  font-family:'Work Sans'; font-size:14px;
+  border:1px solid var(--line);
+  border-radius:7px;
+  padding:8px 9px;
+  background:#fff;
+  color:var(--ink);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+input[type=text]:hover, input[type=date]:hover, select:hover, textarea:hover{
+  border-color: var(--sage);
+}
+input[type=text]:focus, input[type=date]:focus, select:focus, textarea:focus{
+  outline: none;
+  border-color: var(--brass);
+  box-shadow: 0 0 0 3px rgba(217,138,156,0.25);
+}
+textarea{ resize:vertical; min-height:70px; font-family:'Work Sans'; }
+
+.deadline-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:8px; }
+.deadline-row{
+  display:flex; align-items:center; gap:12px;
+  padding:11px 12px;
+  border-radius:8px;
+  background: var(--paper);
+  border-left:4px solid var(--sage);
+  transition: background 0.15s ease, box-shadow 0.15s ease;
+}
+.deadline-row:hover{ background: var(--paper-dim); box-shadow: 0 2px 8px rgba(74,33,64,0.06); }
+.deadline-row.urgent{ border-left-color: var(--coral); }
+.deadline-row.done{ opacity:0.5; }
+.deadline-row .chk{
+  width:19px;height:19px; border-radius:50%; border:2px solid var(--ink-soft);
+  cursor:pointer; flex-shrink:0; display:flex; align-items:center; justify-content:center;
+  background:#fff;
+  transition: border-color 0.15s ease, transform 0.15s ease, background 0.15s ease;
+}
+.deadline-row .chk:hover{ border-color: var(--sage); transform: scale(1.1); }
+.deadline-row .chk:active{ transform: scale(0.9); }
+.deadline-row.done .chk{ background: var(--sage); border-color: var(--sage); }
+.deadline-row.done .chk::after{ content:"✓"; color:#fff; font-size:12px; }
+.deadline-main{ flex:1; min-width:0; }
+.deadline-title{ font-weight:600; font-size:14.5px; }
+.deadline-title.strike{ text-decoration: line-through; }
+.deadline-meta{ font-size:12px; color:var(--ink-soft); margin-top:2px; display:flex; gap:8px; flex-wrap:wrap; align-items:center;}
+.subj-chip{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:10.5px;
+  padding:2px 7px;
+  border-radius:999px;
+  color:#fff;
+}
+.due-badge{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:12px;
+  white-space:nowrap;
+}
+.due-badge.urgent{ color: var(--coral); font-weight:600; }
+.icon-btn{
+  background:none; border:none; cursor:pointer; color:var(--ink-soft); font-size:15px; padding:4px;
+  border-radius:5px;
+  transition: color 0.15s ease, transform 0.15s ease, background 0.15s ease;
+}
+.icon-btn:hover{ color: var(--coral); background: rgba(212,61,107,0.09); transform: scale(1.12); }
+.icon-btn:active{ transform: scale(0.92); }
+
+/* Notes */
+.notes-grid{
+  display:grid; grid-template-columns: repeat(auto-fill, minmax(230px,1fr)); gap:14px;
+}
+.note-card{
+  background: var(--paper);
+  border-radius:8px;
+  padding:14px;
+  position:relative;
+  border-top:4px solid var(--sage);
+  box-shadow: 0 2px 6px rgba(74,33,64,0.07);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.note-card:hover{ transform: translateY(-2px); box-shadow: 0 8px 18px rgba(74,33,64,0.13); }
+.note-card .subj-chip{ display:inline-block; margin-bottom:8px; }
+.note-card h4{
+  font-family:'Fraunces', serif;
+  font-weight:600;
+  font-size:15.5px;
+  margin:0 0 6px;
+}
+.note-card p{
+  font-size:13px;
+  color: var(--ink-soft);
+  white-space:pre-wrap;
+  line-height:1.5;
+  margin:0;
+}
+.note-card .note-actions{
+  position:absolute; top:10px; right:10px; display:flex; gap:4px;
+}
+.note-card .quiz-icon-btn{
+  background:none; border:none; cursor:pointer; color:var(--ink-soft); font-size:13px; padding:3px;
+  border-radius:5px;
+  transition: color 0.15s ease, background 0.15s ease, transform 0.15s ease;
+}
+.note-card .quiz-icon-btn:hover{ color: var(--ink); background: rgba(74,33,64,0.08); transform: scale(1.1); }
+
+/* ---------- QUIZ PROMPT BANNER ---------- */
+.quiz-prompt{
+  display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;
+  background: var(--paper);
+  border: 1px dashed var(--brass);
+  border-radius:8px;
+  padding:10px 14px;
+  margin-bottom:14px;
+  font-size:13.5px;
+  color: var(--ink);
+}
+.quiz-prompt-actions{ display:flex; gap:8px; }
+
+/* ---------- QUIZ MODAL ---------- */
+.modal-overlay{
+  position:fixed; inset:0;
+  background: rgba(43,20,38,0.45);
+  display:flex; align-items:center; justify-content:center;
+  z-index:100;
+  padding:20px;
+}
+.modal-card{
+  background: var(--chalk);
+  border-radius: 14px;
+  padding: 22px 24px;
+  max-width: 520px;
+  width: 100%;
+  max-height: 82vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 50px -12px rgba(43,20,38,0.5);
+}
+.modal-head{
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  margin-bottom:4px;
+}
+.modal-head h3{
+  font-family:'Fraunces', serif; font-weight:600; font-size:20px; margin:0;
+}
+.quiz-subhead{
+  font-size:13px; color:var(--ink-soft); margin:2px 0 16px;
+}
+.quiz-question{
+  margin-bottom:16px;
+  padding-bottom:16px;
+  border-bottom: 1px dashed var(--line);
+}
+.quiz-question:last-of-type{ border-bottom:none; }
+.quiz-sentence{
+  font-family:'Work Sans'; font-size:14px; color:var(--ink); margin:0 0 8px; line-height:1.5;
+}
+.quiz-input{ width:100%; }
+.quiz-input.correct{ border-color: var(--sage); box-shadow: 0 0 0 3px rgba(201,123,149,0.2); }
+.quiz-input.incorrect{ border-color: var(--coral); box-shadow: 0 0 0 3px rgba(212,61,107,0.15); }
+.quiz-feedback{
+  font-size:12.5px; margin:6px 0 0; font-weight:600;
+}
+.quiz-feedback.correct{ color: var(--sage); }
+.quiz-feedback.incorrect{ color: var(--coral); }
+.quiz-actions{ display:flex; gap:10px; margin-top:6px; }
+.quiz-score{
+  margin-top:14px; padding-top:14px; border-top:1px solid var(--line);
+  font-family:'Fraunces', serif; font-weight:600; font-size:16px; color:var(--ink); text-align:center;
+}
+
+.empty-state{
+  text-align:center;
+  padding:36px 12px;
+  color: var(--ink-soft);
+  font-size:14px;
+}
+.empty-state .big{
+  font-family:'Caveat', cursive;
+  font-size:26px;
+  color: var(--ink);
+  display:block;
+  margin-bottom:4px;
+}
+.save-indicator{
+  position:fixed; bottom:16px; right:16px;
+  font-family:'IBM Plex Mono', monospace;
+  font-size:11px;
+  background: var(--ink); color: var(--chalk);
+  padding:7px 12px; border-radius:999px;
+  opacity:0; transition: opacity 0.3s;
+  pointer-events:none;
+}
+.save-indicator.show{ opacity:0.85; }
+
+/* Type badge (test vs assignment) */
+.type-badge{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:10px;
+  letter-spacing:0.05em;
+  text-transform:uppercase;
+  padding:2px 7px;
+  border-radius:999px;
+  border:1px solid currentColor;
+}
+.type-badge.test{ color: var(--coral); }
+.type-badge.assignment{ color: var(--ink-soft); }
+
+/* ---------- CALENDAR ---------- */
+.cal-head{
+  display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;
+}
+.cal-nav{ display:flex; align-items:center; gap:10px; }
+.cal-month-label{
+  font-family:'Fraunces', serif; font-weight:600; font-size:19px; min-width:170px; text-align:center;
+}
+.cal-nav-btn{
+  background: var(--paper); border:1px solid var(--line); border-radius:7px;
+  width:30px; height:30px; cursor:pointer; font-size:15px; color:var(--ink);
+  transition: background 0.15s ease, transform 0.15s ease, border-color 0.15s ease;
+}
+.cal-nav-btn:hover{ background: var(--paper-dim); border-color: var(--sage); transform: translateY(-1px); }
+.cal-nav-btn:active{ transform: translateY(0) scale(0.92); }
+.cal-legend{ display:flex; gap:14px; font-size:12px; color:var(--ink-soft); align-items:center; }
+.cal-legend span{ display:flex; align-items:center; gap:5px; }
+.legend-dot{ width:8px; height:8px; border-radius:50%; display:inline-block; }
+
+.cal-grid{
+  display:grid; grid-template-columns: repeat(7, 1fr); gap:6px;
+}
+.cal-dow{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:10.5px; text-transform:uppercase; color:var(--ink-soft);
+  text-align:center; padding-bottom:4px; letter-spacing:0.06em;
+}
+.cal-cell{
+  background: var(--paper);
+  border-radius:8px;
+  min-height:78px;
+  padding:6px 6px 5px;
+  cursor:pointer;
+  border:1px solid transparent;
+  display:flex; flex-direction:column; gap:3px;
+  transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+.cal-cell:hover{ border-color: var(--sage); transform: translateY(-1px); box-shadow: 0 3px 8px rgba(74,33,64,0.08); }
+.cal-cell:active{ transform: translateY(0) scale(0.98); }
+.cal-cell.outside{ opacity:0.35; }
+.cal-cell.today{ border-color: var(--brass); border-width:2px; }
+.cal-cell.selected{ background: var(--ink); }
+.cal-cell.selected .cal-daynum{ color: var(--chalk); }
+.cal-daynum{
+  font-family:'IBM Plex Mono', monospace; font-size:12px; color: var(--ink-soft);
+}
+.cal-dots{ display:flex; flex-direction:column; gap:2px; overflow:hidden; }
+.cal-dot-item{
+  font-size:10px; font-family:'Work Sans'; font-weight:600;
+  color:#fff; background: var(--sage);
+  border-radius:4px; padding:1.5px 5px;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  display:flex; align-items:center; gap:3px;
+}
+.cal-dot-item.test::before{ content:"✎"; font-size:9px; }
+.cal-more{ font-size:10px; color: var(--ink-soft); font-family:'IBM Plex Mono', monospace; }
+
+.cal-day-detail{
+  margin-top:16px; padding-top:16px; border-top:1px dashed var(--line);
+}
+.cal-day-detail h4{
+  font-family:'Fraunces', serif; font-weight:600; font-size:16px; margin:0 0 10px;
+}
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <div class="board">
+    <div class="board-top">
+      <div>
+        <p class="board-eyebrow">Study Companion</p>
+        <h1 class="board-title" id="boardTitle">Right then — what's on the docket?</h1>
+        <p class="board-sub">Subjects, notes, and deadlines, all kept in one place.</p>
+      </div>
+      <div class="next-deadline" id="nextDeadlineBox">
+        <div class="label">Next due</div>
+        <div id="nextDeadlineContent"></div>
+      </div>
+    </div>
+    <div class="board-bottom">
+      <div class="mood-check">
+        <span class="mood-label">How are you feeling?</span>
+        <div class="mood-options" id="moodOptions"></div>
+      </div>
+      <div class="streak-badge" id="streakBadge"></div>
+    </div>
+  </div>
+
+  <div class="layout">
+    <div class="side-column">
+      <div class="sidebar">
+        <h2>Subjects</h2>
+        <ul class="subject-list" id="subjectList"></ul>
+        <div class="add-subject">
+          <input type="text" id="newSubjectName" placeholder="Add a subject…" maxlength="30">
+        </div>
+        <div class="color-swatches" id="colorSwatches"></div>
+        <button class="btn btn-full" id="addSubjectBtn">Add subject</button>
+        <button class="btn ghost btn-full" id="exportBtn">Export / backup data</button>
+      </div>
+
+      <div class="letter-panel" id="letterPanel">
+        <div class="letter-seal">♡</div>
+        <h2 id="letterHeading">Today's Letter</h2>
+        <p class="letter-date" id="letterDate"></p>
+        <p class="letter-body" id="letterBody"></p>
+        <p class="letter-sign" id="letterSign"></p>
+
+        <button class="letter-special-toggle" id="specialToggleBtn" type="button">+ Add a special day</button>
+        <div class="special-form" id="specialForm" style="display:none;">
+          <div class="field">
+            <label>Date</label>
+            <input type="date" id="specialDate">
+          </div>
+          <label class="special-recurring">
+            <input type="checkbox" id="specialRecurring" checked> Repeats every year
+          </label>
+          <div class="field">
+            <label>Message</label>
+            <textarea id="specialBody" placeholder="Happy birthday! Today's all about you…"></textarea>
+          </div>
+          <div class="field">
+            <label>Sign-off</label>
+            <input type="text" id="specialSign" placeholder="with all my heart" maxlength="40">
+          </div>
+          <div class="special-form-actions">
+            <button class="btn small" id="saveSpecialBtn" type="button">Save</button>
+            <button class="btn ghost small" id="cancelSpecialBtn" type="button">Cancel</button>
+          </div>
+        </div>
+        <ul class="special-list" id="specialList"></ul>
+      </div>
+    </div>
+
+    <div class="main">
+      <div class="search-row">
+        <input type="text" id="searchInput" placeholder="Search notes and deadlines…">
+      </div>
+      <div class="tabs">
+        <div class="tab active" data-tab="deadlines">Deadlines</div>
+        <div class="tab" data-tab="calendar">Calendar</div>
+        <div class="tab" data-tab="notes">Notes</div>
+      </div>
+
+      <div class="panel" id="searchResultsPanel" style="display:none;">
+        <div class="panel-head">
+          <h3>Search results</h3>
+        </div>
+        <div id="searchDeadlineResults"></div>
+        <div id="searchNoteResults" class="notes-grid" style="margin-top:10px;"></div>
+        <div class="empty-state" id="searchEmptyState" style="display:none;">
+          <span class="big">No matches</span>Try a different search term.
+        </div>
+      </div>
+
+      <div class="panel" id="deadlinesPanel">
+        <div class="panel-head">
+          <h3>Deadlines</h3>
+        </div>
+        <div class="deadline-form">
+          <div class="field">
+            <label>What's due</label>
+            <input type="text" id="dlTitle" placeholder="e.g. Essay draft" maxlength="80">
+          </div>
+          <div class="field">
+            <label>Subject</label>
+            <select id="dlSubject"></select>
+          </div>
+          <div class="field">
+            <label>Type</label>
+            <select id="dlType">
+              <option value="assignment">Assignment</option>
+              <option value="test">Test / Exam</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Due date</label>
+            <input type="date" id="dlDate">
+          </div>
+          <button class="btn" id="addDeadlineBtn">Add</button>
+        </div>
+        <ul class="deadline-list" id="deadlineList"></ul>
+      </div>
+
+      <div class="panel" id="calendarPanel" style="display:none;">
+        <div class="cal-head">
+          <div class="cal-nav">
+            <button class="cal-nav-btn" id="calPrev">‹</button>
+            <div class="cal-month-label" id="calMonthLabel"></div>
+            <button class="cal-nav-btn" id="calNext">›</button>
+          </div>
+          <div class="cal-legend">
+            <span><span class="legend-dot" style="background:var(--sage)"></span>Assignment</span>
+            <span><span class="legend-dot" style="background:var(--coral)"></span>✎ Test</span>
+          </div>
+        </div>
+        <div class="cal-grid" id="calDow"></div>
+        <div class="cal-grid" id="calGrid" style="margin-top:6px;"></div>
+        <div class="cal-day-detail" id="calDayDetail" style="display:none;">
+          <h4 id="calDayTitle"></h4>
+          <ul class="deadline-list" id="calDayList"></ul>
+        </div>
+      </div>
+
+      <div class="panel" id="notesPanel" style="display:none;">
+        <div class="panel-head">
+          <h3>Notes</h3>
+          <button class="btn ghost small" id="quizMeBtn">Quiz me on this</button>
+        </div>
+        <div class="quiz-prompt" id="quizPrompt" style="display:none;">
+          <span id="quizPromptText"></span>
+          <div class="quiz-prompt-actions">
+            <button class="btn small" id="quizPromptYes">Quiz me</button>
+            <button class="btn ghost small" id="quizPromptNo">Not now</button>
+          </div>
+        </div>
+        <div class="note-form">
+          <div class="field">
+            <label>Title</label>
+            <input type="text" id="noteTitle" placeholder="e.g. Chapter 4 summary" maxlength="60">
+          </div>
+          <div class="field">
+            <label>Subject</label>
+            <select id="noteSubject"></select>
+          </div>
+          <div class="field" style="grid-column: 1 / -1;">
+            <label>Note</label>
+            <textarea id="noteBody" placeholder="Jot it down…"></textarea>
+          </div>
+          <button class="btn" id="addNoteBtn">Save note</button>
+        </div>
+        <div class="notes-grid" id="notesGrid"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="quizOverlay" style="display:none;">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h3 id="quizTitle">Quick Quiz</h3>
+      <button class="icon-btn" id="quizCloseBtn" title="Close">✕</button>
+    </div>
+    <p class="quiz-subhead">Fill in the missing word from your own notes, then check yourself.</p>
+    <div id="quizBody"></div>
+    <div class="quiz-actions">
+      <button class="btn" id="quizCheckBtn">Check answers</button>
+      <button class="btn ghost" id="quizRegenBtn">New questions</button>
+    </div>
+    <div id="quizScore" class="quiz-score" style="display:none;"></div>
+  </div>
+</div>
+
+<p style="text-align:center; font-size:11.5px; color:var(--ink-soft); font-family:'IBM Plex Mono', monospace; margin-top:28px;">
+  Data is saved in this browser only — same device and browser each time to keep everything.
+</p>
+
+<div class="save-indicator" id="saveIndicator">Saved</div>
+
+<script>
+const COLORS = ['#c97b95','#a55b8f','#e08a9e','#d43d6b','#b6547e','#8a4a6b'];
+const STORAGE_KEY = 'study-companion-data';
+
+let state = {
+  subjects: [],
+  deadlines: [],
+  notes: [],
+  moods: {},
+  streak: { count: 0, lastDate: null },
+  specialLetters: [],
+  activeSubject: 'all',
+  activeTab: 'deadlines'
+};
+
+let pickedColor = COLORS[0];
+
+function uid(){ return Date.now().toString(36) + Math.random().toString(36).slice(2,7); }
+
+function todayISO(){
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+
+function loadState(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(raw){
+      const parsed = JSON.parse(raw);
+      state.subjects = parsed.subjects || [];
+      state.deadlines = parsed.deadlines || [];
+      state.notes = parsed.notes || [];
+      state.moods = parsed.moods || {};
+      state.streak = parsed.streak || { count: 0, lastDate: null };
+      state.specialLetters = parsed.specialLetters || [];
+    }
+  }catch(e){
+    console.error('Could not read saved data', e);
+  }
+  if(state.subjects.length === 0){
+    state.subjects = [
+      {id: uid(), name:'General', color: COLORS[0]}
+    ];
+  }
+  updateStreak();
+  render();
+}
+
+function updateStreak(){
+  const today = todayISO();
+  const last = state.streak.lastDate;
+  if(last === today){
+    // already counted today
+  }else{
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    const yStr = `${yesterday.getFullYear()}-${String(yesterday.getMonth()+1).padStart(2,'0')}-${String(yesterday.getDate()).padStart(2,'0')}`;
+    if(last === yStr){
+      state.streak.count += 1;
+    }else{
+      state.streak.count = 1;
+    }
+    state.streak.lastDate = today;
+    saveState();
+  }
+}
+
+let saveTimeout;
+function saveState(){
+  try{
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      subjects: state.subjects,
+      deadlines: state.deadlines,
+      notes: state.notes,
+      moods: state.moods,
+      streak: state.streak,
+      specialLetters: state.specialLetters
+    }));
+    flashSaved();
+  }catch(e){
+    console.error('Save failed', e);
+    alert('Could not save — your browser storage may be full or blocked (e.g. private/incognito mode).');
+  }
+}
+function flashSaved(){
+  const el = document.getElementById('saveIndicator');
+  el.classList.add('show');
+  clearTimeout(saveTimeout);
+  saveTimeout = setTimeout(()=> el.classList.remove('show'), 1200);
+}
+
+function subjectById(id){ return state.subjects.find(s=>s.id===id); }
+
+function daysUntil(dateStr){
+  const today = new Date(); today.setHours(0,0,0,0);
+  const due = new Date(dateStr + 'T00:00:00');
+  return Math.round((due - today) / 86400000);
+}
+
+function formatDue(dateStr){
+  const d = daysUntil(dateStr);
+  if(d < 0) return {text: `${Math.abs(d)}d overdue`, urgent:true};
+  if(d === 0) return {text:'Due today', urgent:true};
+  if(d === 1) return {text:'Due tomorrow', urgent:true};
+  if(d <= 3) return {text:`${d} days left`, urgent:true};
+  return {text:`${d} days left`, urgent:false};
+}
+
+/* ---------- RENDER ---------- */
+function render(){
+  renderSubjectSidebar();
+  renderSwatches();
+  renderSubjectSelects();
+  renderNextDeadline();
+  renderDeadlines();
+  renderNotes();
+  renderMood();
+  renderStreak();
+  if(document.getElementById('calendarPanel').style.display !== 'none'){
+    renderCalendar();
+  }
+}
+
+const MOOD_OPTIONS = [
+  { emoji:'😴', label:'Tired' },
+  { emoji:'😕', label:'Stressed' },
+  { emoji:'😐', label:'Okay' },
+  { emoji:'🙂', label:'Good' },
+  { emoji:'✨', label:'Great' }
+];
+
+function renderMood(){
+  const box = document.getElementById('moodOptions');
+  const today = todayISO();
+  const selected = state.moods[today];
+  box.innerHTML = '';
+  MOOD_OPTIONS.forEach(m=>{
+    const btn = document.createElement('button');
+    btn.className = 'mood-btn' + (selected === m.emoji ? ' selected' : '');
+    btn.type = 'button';
+    btn.title = m.label;
+    btn.textContent = m.emoji;
+    btn.onclick = ()=>{
+      state.moods[today] = (state.moods[today] === m.emoji) ? null : m.emoji;
+      if(!state.moods[today]) delete state.moods[today];
+      saveState();
+      renderMood();
+    };
+    box.appendChild(btn);
+  });
+}
+
+function renderStreak(){
+  const el = document.getElementById('streakBadge');
+  const count = state.streak.count || 0;
+  if(count <= 0){
+    el.innerHTML = '';
+    return;
+  }
+  el.innerHTML = `<span class="flame">🔥</span> <strong>${count}</strong> day${count===1?'':'s'} in a row`;
+}
+
+function renderSwatches(){
+  const box = document.getElementById('colorSwatches');
+  box.innerHTML = '';
+  COLORS.forEach(c=>{
+    const sw = document.createElement('div');
+    sw.className = 'swatch' + (c===pickedColor ? ' selected':'');
+    sw.style.background = c;
+    sw.onclick = ()=>{ pickedColor = c; renderSwatches(); };
+    box.appendChild(sw);
+  });
+}
+
+function renderSubjectSidebar(){
+  const list = document.getElementById('subjectList');
+  list.innerHTML = '';
+
+  const allItem = document.createElement('li');
+  allItem.className = 'subject-item' + (state.activeSubject==='all' ? ' active':'');
+  allItem.innerHTML = `<span class="dot" style="background:var(--ink-soft)"></span><span class="name">All subjects</span>`;
+  allItem.onclick = ()=>{ state.activeSubject='all'; render(); };
+  list.appendChild(allItem);
+
+  state.subjects.forEach(s=>{
+    const count = state.deadlines.filter(d=>d.subjectId===s.id && !d.done).length;
+    const li = document.createElement('li');
+    li.className = 'subject-item' + (state.activeSubject===s.id ? ' active':'');
+    li.innerHTML = `<span class="dot" style="background:${s.color}"></span><span class="name">${escapeHtml(s.name)}</span><span class="count">${count||''}</span>`;
+    li.onclick = ()=>{ state.activeSubject = s.id; render(); };
+    list.appendChild(li);
+  });
+}
+
+function renderSubjectSelects(){
+  ['dlSubject','noteSubject'].forEach(id=>{
+    const sel = document.getElementById(id);
+    const prev = sel.value;
+    sel.innerHTML = state.subjects.map(s=>`<option value="${s.id}">${escapeHtml(s.name)}</option>`).join('');
+    if(prev) sel.value = prev;
+  });
+}
+
+function renderNextDeadline(){
+  const box = document.getElementById('nextDeadlineContent');
+  const upcoming = state.deadlines
+    .filter(d=>!d.done)
+    .sort((a,b)=> new Date(a.date) - new Date(b.date));
+  if(upcoming.length === 0){
+    box.innerHTML = `<div class="none">Nothing on the board — add a deadline to get started.</div>`;
+    return;
+  }
+  const next = upcoming[0];
+  const d = daysUntil(next.date);
+  const subj = subjectById(next.subjectId);
+  let countText;
+  if(d < 0) countText = `${Math.abs(d)}<small>days overdue</small>`;
+  else if(d === 0) countText = `Today`;
+  else countText = `${d}<small>day${d===1?'':'s'} left</small>`;
+  box.innerHTML = `
+    <div class="count">${countText}</div>
+    <div class="what">${escapeHtml(next.title)}${subj ? ' · ' + escapeHtml(subj.name) : ''}</div>
+  `;
+}
+
+function renderDeadlines(){
+  const list = document.getElementById('deadlineList');
+  list.innerHTML = '';
+  let items = state.deadlines.slice();
+  if(state.activeSubject !== 'all') items = items.filter(d=>d.subjectId===state.activeSubject);
+  items.sort((a,b)=>{
+    if(a.done !== b.done) return a.done ? 1 : -1;
+    return new Date(a.date) - new Date(b.date);
+  });
+
+  if(items.length === 0){
+    list.innerHTML = `<div class="empty-state"><span class="big">All clear!</span>No deadlines here yet.</div>`;
+    return;
+  }
+
+  items.forEach(dl=>{
+    const subj = subjectById(dl.subjectId);
+    const due = formatDue(dl.date);
+    const li = document.createElement('li');
+    li.className = 'deadline-row' + (due.urgent && !dl.done ? ' urgent':'') + (dl.done ? ' done':'');
+    li.innerHTML = `
+      <div class="chk"></div>
+      <div class="deadline-main">
+        <div class="deadline-title${dl.done?' strike':''}">${escapeHtml(dl.title)}</div>
+        <div class="deadline-meta">
+          ${subj ? `<span class="subj-chip" style="background:${subj.color}">${escapeHtml(subj.name)}</span>` : ''}
+          <span class="type-badge ${dl.type==='test'?'test':'assignment'}">${dl.type==='test'?'Test':'Assignment'}</span>
+          <span class="due-badge${due.urgent && !dl.done ? ' urgent':''}">${escapeHtml(new Date(dl.date+'T00:00:00').toDateString().slice(4))} · ${due.text}</span>
+        </div>
+      </div>
+      <button class="icon-btn" title="Delete">✕</button>
+    `;
+    li.querySelector('.chk').onclick = ()=>{ dl.done = !dl.done; saveState(); render(); };
+    li.querySelector('.icon-btn').onclick = ()=>{
+      state.deadlines = state.deadlines.filter(x=>x.id!==dl.id);
+      saveState(); render();
+    };
+    list.appendChild(li);
+  });
+}
+
+function renderNotes(){
+  const grid = document.getElementById('notesGrid');
+  grid.innerHTML = '';
+  let items = state.notes.slice();
+  if(state.activeSubject !== 'all') items = items.filter(n=>n.subjectId===state.activeSubject);
+  items.sort((a,b)=> b.createdAt - a.createdAt);
+
+  if(items.length === 0){
+    grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1;"><span class="big">Blank page</span>No notes here yet.</div>`;
+    return;
+  }
+
+  items.forEach(n=>{
+    const subj = subjectById(n.subjectId);
+    const card = document.createElement('div');
+    card.className = 'note-card';
+    if(subj) card.style.borderTopColor = subj.color;
+    card.innerHTML = `
+      <div class="note-actions">
+        <button class="quiz-icon-btn" title="Quiz me on this note">📝</button>
+        <button class="icon-btn" title="Delete">✕</button>
+      </div>
+      ${subj ? `<span class="subj-chip" style="background:${subj.color}">${escapeHtml(subj.name)}</span>` : ''}
+      <h4>${escapeHtml(n.title)}</h4>
+      <p>${escapeHtml(n.body)}</p>
+    `;
+    card.querySelector('.quiz-icon-btn').onclick = ()=>{
+      openQuiz([n], `Quiz: ${n.title}`);
+    };
+    card.querySelector('.icon-btn').onclick = ()=>{
+      state.notes = state.notes.filter(x=>x.id!==n.id);
+      saveState(); render();
+    };
+    grid.appendChild(card);
+  });
+}
+
+function escapeHtml(str){
+  const div = document.createElement('div');
+  div.textContent = str ?? '';
+  return div.innerHTML;
+}
+
+/* ---------- QUIZ GENERATOR ---------- */
+const QUIZ_STOPWORDS = new Set([
+  'about','after','again','against','all','also','although','always','among','another','answer',
+  'around','because','before','being','below','between','both','cannot','could','different',
+  'does','doing','during','each','either','enough','every','first','from','further','general',
+  'given','have','having','here','however','into','itself','later','least','likely','little',
+  'maybe','might','more','most','much','must','never','often','once','only','other','our','over',
+  'perhaps','rather','really','second','several','shall','should','simply','since','some',
+  'something','still','such','than','that','their','them','then','there','these','they','this',
+  'those','though','through','today','under','until','using','very','wants','were','what',
+  'when','where','which','while','with','within','without','would','your'
+]);
+
+function extractSentences(text){
+  return text
+    .replace(/\s+/g,' ')
+    .split(/(?<=[.!?])\s+/)
+    .map(s=>s.trim())
+    .filter(s=> s.length >= 20 && s.split(' ').length >= 5);
+}
+
+function pickBlankWord(sentence){
+  const words = sentence.replace(/[.,!?;:()"'“”]/g,'').split(/\s+/);
+  const candidates = words.filter(w => w.length >= 5 && !QUIZ_STOPWORDS.has(w.toLowerCase()));
+  if(candidates.length === 0) return null;
+  return candidates[Math.floor(Math.random() * candidates.length)];
+}
+
+function buildQuizFromNotes(notesArr){
+  let sentences = [];
+  notesArr.forEach(n=>{ sentences = sentences.concat(extractSentences(n.body)); });
+
+  for(let i = sentences.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [sentences[i], sentences[j]] = [sentences[j], sentences[i]];
+  }
+
+  const questions = [];
+  const usedSentences = new Set();
+  for(const s of sentences){
+    if(questions.length >= 8) break;
+    if(usedSentences.has(s)) continue;
+    const word = pickBlankWord(s);
+    if(!word) continue;
+    const escaped = word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const re = new RegExp(`\\b${escaped}\\b`, 'i');
+    if(!re.test(s)) continue;
+    const blanked = s.replace(re, '▁▁▁▁▁');
+    questions.push({ sentence: blanked, answer: word });
+    usedSentences.add(s);
+  }
+  return questions;
+}
+
+let currentQuizQuestions = [];
+let currentQuizNotesArr = [];
+
+function openQuiz(notesArr, title){
+  currentQuizNotesArr = notesArr;
+  currentQuizQuestions = buildQuizFromNotes(notesArr);
+  document.getElementById('quizTitle').textContent = title;
+  renderQuizQuestions();
+  document.getElementById('quizScore').style.display = 'none';
+  document.getElementById('quizOverlay').style.display = 'flex';
+}
+
+function renderQuizQuestions(){
+  const body = document.getElementById('quizBody');
+  body.innerHTML = '';
+  if(currentQuizQuestions.length === 0){
+    body.innerHTML = `<div class="empty-state"><span class="big">Not quite enough yet</span>Add a little more detail to these notes, then try again.</div>`;
+    document.getElementById('quizCheckBtn').style.display = 'none';
+    return;
+  }
+  document.getElementById('quizCheckBtn').style.display = '';
+  currentQuizQuestions.forEach((q, i)=>{
+    const div = document.createElement('div');
+    div.className = 'quiz-question';
+    div.innerHTML = `
+      <p class="quiz-sentence">${i+1}. ${escapeHtml(q.sentence)}</p>
+      <input type="text" class="quiz-input" data-idx="${i}" placeholder="Fill in the blank">
+      <p class="quiz-feedback" style="display:none;"></p>
+    `;
+    body.appendChild(div);
+  });
+}
+
+document.getElementById('quizCheckBtn').onclick = ()=>{
+  let correctCount = 0;
+  const inputs = document.querySelectorAll('.quiz-input');
+  inputs.forEach(input=>{
+    const idx = parseInt(input.dataset.idx, 10);
+    const q = currentQuizQuestions[idx];
+    const val = input.value.trim().toLowerCase().replace(/[.,!?;:]/g,'');
+    const correct = val === q.answer.toLowerCase();
+    if(correct) correctCount++;
+    const feedback = input.parentElement.querySelector('.quiz-feedback');
+    feedback.style.display = '';
+    feedback.textContent = correct ? 'Correct!' : `Not quite — it was "${q.answer}"`;
+    feedback.className = 'quiz-feedback ' + (correct ? 'correct' : 'incorrect');
+    input.classList.toggle('correct', correct);
+    input.classList.toggle('incorrect', !correct);
+  });
+  const scoreEl = document.getElementById('quizScore');
+  scoreEl.style.display = '';
+  scoreEl.textContent = `You got ${correctCount} out of ${currentQuizQuestions.length} right.`;
+};
+
+document.getElementById('quizRegenBtn').onclick = ()=>{
+  currentQuizQuestions = buildQuizFromNotes(currentQuizNotesArr);
+  renderQuizQuestions();
+  document.getElementById('quizScore').style.display = 'none';
+};
+
+document.getElementById('quizCloseBtn').onclick = ()=>{
+  document.getElementById('quizOverlay').style.display = 'none';
+};
+
+document.getElementById('quizMeBtn').onclick = ()=>{
+  let notesArr = state.notes;
+  let title = 'Quiz: All notes';
+  if(state.activeSubject !== 'all'){
+    notesArr = state.notes.filter(n => n.subjectId === state.activeSubject);
+    const subj = subjectById(state.activeSubject);
+    title = `Quiz: ${subj ? subj.name : 'Notes'}`;
+  }
+  openQuiz(notesArr, title);
+};
+
+document.getElementById('quizPromptYes').onclick = ()=>{
+  const subjId = document.getElementById('quizPrompt').dataset.subjectId;
+  const notesArr = state.notes.filter(n => n.subjectId === subjId);
+  const subj = subjectById(subjId);
+  openQuiz(notesArr, `Quiz: ${subj ? subj.name : 'Notes'}`);
+  document.getElementById('quizPrompt').style.display = 'none';
+};
+document.getElementById('quizPromptNo').onclick = ()=>{
+  document.getElementById('quizPrompt').style.display = 'none';
+};
+
+/* ---------- EVENTS ---------- */
+document.getElementById('addSubjectBtn').onclick = ()=>{
+  const input = document.getElementById('newSubjectName');
+  const name = input.value.trim();
+  if(!name) return;
+  state.subjects.push({id: uid(), name, color: pickedColor});
+  input.value = '';
+  saveState(); render();
+};
+
+document.getElementById('exportBtn').onclick = ()=>{
+  const data = {
+    subjects: state.subjects,
+    deadlines: state.deadlines,
+    notes: state.notes,
+    moods: state.moods,
+    streak: state.streak,
+    specialLetters: state.specialLetters,
+    exportedAt: new Date().toISOString()
+  };
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `study-companion-backup-${todayISO()}.json`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+};
+
+/* ---------- SEARCH ---------- */
+function performSearch(query){
+  const q = query.trim().toLowerCase();
+  const searchPanel = document.getElementById('searchResultsPanel');
+  const tabsEl = document.querySelector('.tabs');
+  const deadlinesPanel = document.getElementById('deadlinesPanel');
+  const calendarPanel = document.getElementById('calendarPanel');
+  const notesPanel = document.getElementById('notesPanel');
+
+  if(!q){
+    searchPanel.style.display = 'none';
+    tabsEl.style.display = '';
+    const activeTab = document.querySelector('.tab.active');
+    const which = activeTab ? activeTab.dataset.tab : 'deadlines';
+    deadlinesPanel.style.display = which==='deadlines' ? '' : 'none';
+    calendarPanel.style.display = which==='calendar' ? '' : 'none';
+    notesPanel.style.display = which==='notes' ? '' : 'none';
+    return;
+  }
+
+  tabsEl.style.display = 'none';
+  deadlinesPanel.style.display = 'none';
+  calendarPanel.style.display = 'none';
+  notesPanel.style.display = 'none';
+  searchPanel.style.display = '';
+
+  const matchedDeadlines = state.deadlines.filter(d => d.title.toLowerCase().includes(q));
+  const matchedNotes = state.notes.filter(n => n.title.toLowerCase().includes(q) || n.body.toLowerCase().includes(q));
+
+  const dlContainer = document.getElementById('searchDeadlineResults');
+  dlContainer.innerHTML = '';
+  if(matchedDeadlines.length){
+    const ul = document.createElement('ul');
+    ul.className = 'deadline-list';
+    matchedDeadlines.forEach(dl=>{
+      const subj = subjectById(dl.subjectId);
+      const due = formatDue(dl.date);
+      const li = document.createElement('li');
+      li.className = 'deadline-row' + (due.urgent && !dl.done ? ' urgent':'') + (dl.done ? ' done':'');
+      li.innerHTML = `
+        <div class="chk"></div>
+        <div class="deadline-main">
+          <div class="deadline-title${dl.done?' strike':''}">${escapeHtml(dl.title)}</div>
+          <div class="deadline-meta">
+            ${subj ? `<span class="subj-chip" style="background:${subj.color}">${escapeHtml(subj.name)}</span>` : ''}
+            <span class="type-badge ${dl.type==='test'?'test':'assignment'}">${dl.type==='test'?'Test':'Assignment'}</span>
+            <span class="due-badge${due.urgent && !dl.done ? ' urgent':''}">${escapeHtml(new Date(dl.date+'T00:00:00').toDateString().slice(4))} · ${due.text}</span>
+          </div>
+        </div>
+        <button class="icon-btn" title="Delete">✕</button>
+      `;
+      li.querySelector('.chk').onclick = ()=>{ dl.done = !dl.done; saveState(); render(); performSearch(document.getElementById('searchInput').value); };
+      li.querySelector('.icon-btn').onclick = ()=>{
+        state.deadlines = state.deadlines.filter(x=>x.id!==dl.id);
+        saveState(); render(); performSearch(document.getElementById('searchInput').value);
+      };
+      ul.appendChild(li);
+    });
+    dlContainer.appendChild(ul);
+  }
+
+  const noteContainer = document.getElementById('searchNoteResults');
+  noteContainer.innerHTML = '';
+  matchedNotes.forEach(n=>{
+    const subj = subjectById(n.subjectId);
+    const card = document.createElement('div');
+    card.className = 'note-card';
+    if(subj) card.style.borderTopColor = subj.color;
+    card.innerHTML = `
+      <div class="note-actions"><button class="icon-btn" title="Delete">✕</button></div>
+      ${subj ? `<span class="subj-chip" style="background:${subj.color}">${escapeHtml(subj.name)}</span>` : ''}
+      <h4>${escapeHtml(n.title)}</h4>
+      <p>${escapeHtml(n.body)}</p>
+    `;
+    card.querySelector('.icon-btn').onclick = ()=>{
+      state.notes = state.notes.filter(x=>x.id!==n.id);
+      saveState(); render(); performSearch(document.getElementById('searchInput').value);
+    };
+    noteContainer.appendChild(card);
+  });
+
+  document.getElementById('searchEmptyState').style.display = (matchedDeadlines.length===0 && matchedNotes.length===0) ? '' : 'none';
+}
+
+document.getElementById('searchInput').addEventListener('input', (e)=>{
+  performSearch(e.target.value);
+});
+
+document.getElementById('addDeadlineBtn').onclick = ()=>{
+  const title = document.getElementById('dlTitle').value.trim();
+  const subjectId = document.getElementById('dlSubject').value;
+  const type = document.getElementById('dlType').value;
+  const date = document.getElementById('dlDate').value;
+  if(!title || !date){ return; }
+  state.deadlines.push({id: uid(), title, subjectId, type, date, done:false});
+  document.getElementById('dlTitle').value = '';
+  document.getElementById('dlDate').value = '';
+  saveState(); render();
+};
+
+document.getElementById('addNoteBtn').onclick = ()=>{
+  const title = document.getElementById('noteTitle').value.trim();
+  const subjectId = document.getElementById('noteSubject').value;
+  const body = document.getElementById('noteBody').value.trim();
+  if(!title || !body) return;
+  state.notes.push({id: uid(), title, subjectId, body, createdAt: Date.now()});
+  document.getElementById('noteTitle').value = '';
+  document.getElementById('noteBody').value = '';
+  saveState(); render();
+
+  const subj = subjectById(subjectId);
+  const promptEl = document.getElementById('quizPrompt');
+  document.getElementById('quizPromptText').textContent = `Note saved. Want a quick quiz on ${subj ? subj.name : 'this subject'}?`;
+  promptEl.dataset.subjectId = subjectId;
+  promptEl.style.display = 'flex';
+};
+
+const TAB_ORDER = ['deadlines', 'calendar', 'notes'];
+let currentTabIndex = 0;
+
+document.querySelectorAll('.tab').forEach(tab=>{
+  tab.onclick = ()=>{
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    const which = tab.dataset.tab;
+    const newIndex = TAB_ORDER.indexOf(which);
+    const direction = newIndex > currentTabIndex ? 'forward' : (newIndex < currentTabIndex ? 'backward' : null);
+    currentTabIndex = newIndex;
+
+    const panelMap = {
+      deadlines: document.getElementById('deadlinesPanel'),
+      calendar: document.getElementById('calendarPanel'),
+      notes: document.getElementById('notesPanel')
+    };
+    Object.entries(panelMap).forEach(([key, el])=>{
+      el.classList.remove('page-turn-forward', 'page-turn-backward');
+      if(key === which){
+        el.style.display = '';
+        if(direction){
+          void el.offsetWidth; // force reflow so the animation can replay
+          el.classList.add(direction === 'forward' ? 'page-turn-backward' : 'page-turn-forward');
+        }
+      }else{
+        el.style.display = 'none';
+      }
+    });
+    if(which==='calendar') renderCalendar();
+  };
+});
+
+/* ---------- CALENDAR ---------- */
+const today = new Date();
+let calYear = today.getFullYear();
+let calMonth = today.getMonth(); // 0-indexed
+let calSelectedDate = null;
+
+const DOW = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+function toDateStr(y,m,d){
+  return `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+}
+
+function renderCalendar(){
+  document.getElementById('calMonthLabel').textContent = `${MONTH_NAMES[calMonth]} ${calYear}`;
+
+  const dowRow = document.getElementById('calDow');
+  dowRow.innerHTML = DOW.map(d=>`<div class="cal-dow">${d}</div>`).join('');
+
+  const grid = document.getElementById('calGrid');
+  grid.innerHTML = '';
+
+  const firstOfMonth = new Date(calYear, calMonth, 1);
+  const startOffset = firstOfMonth.getDay(); // 0=Sun
+  const daysInMonth = new Date(calYear, calMonth+1, 0).getDate();
+  const daysInPrevMonth = new Date(calYear, calMonth, 0).getDate();
+
+  const todayStr = toDateStr(today.getFullYear(), today.getMonth(), today.getDate());
+
+  // deadlines relevant to active subject filter
+  let relevant = state.deadlines.slice();
+  if(state.activeSubject !== 'all') relevant = relevant.filter(d=>d.subjectId===state.activeSubject);
+  const byDate = {};
+  relevant.forEach(d=>{
+    if(!byDate[d.date]) byDate[d.date] = [];
+    byDate[d.date].push(d);
+  });
+
+  const totalCells = Math.ceil((startOffset + daysInMonth) / 7) * 7;
+
+  for(let i=0; i<totalCells; i++){
+    const cell = document.createElement('div');
+    let cellYear = calYear, cellMonth = calMonth, dayNum, outside = false;
+
+    if(i < startOffset){
+      dayNum = daysInPrevMonth - startOffset + i + 1;
+      cellMonth = calMonth - 1;
+      outside = true;
+    }else if(i >= startOffset + daysInMonth){
+      dayNum = i - startOffset - daysInMonth + 1;
+      cellMonth = calMonth + 1;
+      outside = true;
+    }else{
+      dayNum = i - startOffset + 1;
+    }
+    if(cellMonth < 0){ cellMonth = 11; cellYear -= 1; }
+    if(cellMonth > 11){ cellMonth = 0; cellYear += 1; }
+
+    const dateStr = toDateStr(cellYear, cellMonth, dayNum);
+    cell.className = 'cal-cell' + (outside ? ' outside':'') + (dateStr===todayStr ? ' today':'') + (dateStr===calSelectedDate ? ' selected':'');
+    cell.innerHTML = `<div class="cal-daynum">${dayNum}</div>`;
+
+    const dayItems = byDate[dateStr] || [];
+    if(dayItems.length){
+      const dotsWrap = document.createElement('div');
+      dotsWrap.className = 'cal-dots';
+      dayItems.slice(0,2).forEach(d=>{
+        const subj = subjectById(d.subjectId);
+        const chip = document.createElement('div');
+        chip.className = 'cal-dot-item' + (d.type==='test' ? ' test':'');
+        chip.style.background = d.type==='test' ? 'var(--coral)' : (subj ? subj.color : 'var(--sage)');
+        chip.textContent = d.title;
+        dotsWrap.appendChild(chip);
+      });
+      if(dayItems.length > 2){
+        const more = document.createElement('div');
+        more.className = 'cal-more';
+        more.textContent = `+${dayItems.length-2} more`;
+        dotsWrap.appendChild(more);
+      }
+      cell.appendChild(dotsWrap);
+    }
+
+    cell.onclick = ()=>{
+      calSelectedDate = dateStr;
+      renderCalendar();
+    };
+    grid.appendChild(cell);
+  }
+
+  renderCalDayDetail(byDate);
+}
+
+function renderCalDayDetail(byDate){
+  const detail = document.getElementById('calDayDetail');
+  if(!calSelectedDate){ detail.style.display = 'none'; return; }
+  const items = byDate[calSelectedDate] || [];
+  detail.style.display = '';
+  const d = new Date(calSelectedDate + 'T00:00:00');
+  document.getElementById('calDayTitle').textContent = d.toDateString();
+
+  const list = document.getElementById('calDayList');
+  list.innerHTML = '';
+  if(items.length === 0){
+    list.innerHTML = `<div class="empty-state">Nothing due this day.</div>`;
+    return;
+  }
+  items.forEach(dl=>{
+    const subj = subjectById(dl.subjectId);
+    const li = document.createElement('li');
+    li.className = 'deadline-row' + (dl.done ? ' done':'');
+    li.innerHTML = `
+      <div class="chk"></div>
+      <div class="deadline-main">
+        <div class="deadline-title${dl.done?' strike':''}">${escapeHtml(dl.title)}</div>
+        <div class="deadline-meta">
+          ${subj ? `<span class="subj-chip" style="background:${subj.color}">${escapeHtml(subj.name)}</span>` : ''}
+          <span class="type-badge ${dl.type==='test'?'test':'assignment'}">${dl.type==='test'?'Test':'Assignment'}</span>
+        </div>
+      </div>
+      <button class="icon-btn" title="Delete">✕</button>
+    `;
+    li.querySelector('.chk').onclick = ()=>{ dl.done = !dl.done; saveState(); renderCalendar(); render(); };
+    li.querySelector('.icon-btn').onclick = ()=>{
+      state.deadlines = state.deadlines.filter(x=>x.id!==dl.id);
+      saveState(); renderCalendar(); render();
+    };
+    list.appendChild(li);
+  });
+}
+
+document.getElementById('calPrev').onclick = ()=>{
+  calMonth -= 1;
+  if(calMonth < 0){ calMonth = 11; calYear -= 1; }
+  renderCalendar();
+};
+document.getElementById('calNext').onclick = ()=>{
+  calMonth += 1;
+  if(calMonth > 11){ calMonth = 0; calYear += 1; }
+  renderCalendar();
+};
+
+/* ---------- TODAY'S LETTER ---------- */
+const LOVE_LETTERS = [
+  { body: "I hope today treats you gently. Whatever you're working through right now, I believe you'll get there — you always do. Take a breath, drink some water, and remember someone out here is endlessly proud of you.", sign: "with all my heart" },
+  { body: "You have this quiet way of making hard things look possible. I notice it more than you know. However today's studying goes, know that you're doing better than you think you are.", sign: "always yours" },
+  { body: "A small reminder in the middle of your day: you are so much more than your to-do list. Rest when you need to. The work will still be there, and so will I.", sign: "forever" },
+  { body: "I was thinking about how far you've come — not just in your studies, but in everything. You keep showing up for yourself, and that's not a small thing. I see it.", sign: "with love" },
+  { body: "Today, be kind to yourself. You don't have to earn rest, and you don't have to be perfect to be proud of. I'm proud of you exactly as you are, right now.", sign: "your biggest fan" },
+  { body: "If your brain feels foggy today, that's alright. Some days are for pushing through, and some are for going slow. Either way, I'm rooting for you from wherever I am.", sign: "always" },
+  { body: "You make ordinary days feel a little brighter just by being in them. I hope your notes make sense, your coffee stays warm, and your deadlines feel a little less heavy today.", sign: "yours completely" },
+  { body: "Here's your gentle nudge: you are capable of more than you give yourself credit for. I've watched you figure out hard things before. You'll figure this out too.", sign: "with everything I have" },
+  { body: "Some days I just want to remind you that you're loved, fully and without conditions — not because of your grades, not because of your productivity, just because you're you.", sign: "always yours" },
+  { body: "Whatever's on your list today, take it one line at a time. You don't have to carry all of it at once. I'm cheering you on from the sidelines, quietly and always.", sign: "with love" },
+  { body: "I hope something small makes you smile today — a song, a stranger's kindness, a good sentence in your notes. You deserve little bits of light in ordinary days.", sign: "forever yours" },
+  { body: "You've never needed to prove anything to me. Just keep being the thoughtful, determined person you are, and the rest will follow. I'll be here either way.", sign: "always" },
+  { body: "On the days that feel slow or discouraging, remember this: growth is rarely a straight line. You are allowed to have an off day and still be doing wonderfully overall.", sign: "with all my heart" },
+  { body: "I keep thinking about how lucky I am to watch you build the life you want, one study session at a time. It's a privilege, honestly, to be in your corner.", sign: "your biggest fan" },
+  { body: "Today's reminder: you are not behind. You are exactly where you need to be, learning what you need to learn, at your own pace. I trust that, even when you don't.", sign: "yours" },
+  { body: "If no one has told you yet today — you're doing great. Even the parts that feel messy or unfinished are part of something you're building really well.", sign: "with love, always" },
+  { body: "I hope your focus comes easily today, but if it doesn't, that's okay too. Progress isn't always visible day to day. I see the bigger picture, and it's beautiful.", sign: "always yours" },
+  { body: "You bring a kind of steadiness into my life that I don't take for granted. I hope today gives some of that steadiness back to you, in whatever small way it can.", sign: "forever" },
+  { body: "A little encouragement for the middle of your day: your effort matters even on the days it doesn't feel like it. Keep going. I'm proud of you either way.", sign: "with everything I have" },
+  { body: "I love watching you care about things deeply — your studies, your goals, the people around you. That same care is exactly why you'll get through today just fine.", sign: "yours completely" },
+  { body: "However today unfolds, you don't have to face it alone in spirit. I'm thinking of you, hoping your work goes smoothly and your mind gets a little rest too.", sign: "always" },
+  { body: "You're allowed to take today one small win at a time. Finished a page? Good. Understood a concept? Even better. It all adds up, and I notice all of it.", sign: "with love" },
+  { body: "I hope you remember, especially on the tiring days, that this is temporary and you are capable. You've done hard semesters before. You'll do this one too.", sign: "always yours" },
+  { body: "Something about the way you keep trying, even when it's difficult, makes me admire you more each week. I hope today rewards that effort, even in a small way.", sign: "your biggest fan" },
+  { body: "Sending you a little bit of calm for today. Whatever's due, whatever's hard, you've handled hard things before. I believe in you completely, today and always.", sign: "forever yours" },
+  { body: "I hope you take a proper break today, even a short one. You work hard enough for two people — let yourself breathe a little. I'll be proud of you either way.", sign: "with all my heart" },
+  { body: "You don't always need to have it figured out. Some days are just about showing up, and you keep showing up. That's more than enough for me.", sign: "yours" },
+  { body: "Today, I hope something goes easier than you expect. And if it doesn't, remember I'm not going anywhere, and neither is my belief in you.", sign: "always" },
+  { body: "I hope your morning starts kindly and your afternoon doesn't drag too much. Little things like this cross my mind more often than you'd guess — you're rarely far from my thoughts.", sign: "yours, always" },
+  { body: "You handle more than people realize, quietly and without much fuss. I notice the quiet parts too, not just the big wins. All of it counts, and all of it matters to me.", sign: "with love" },
+  { body: "If today feels like a lot, it's okay to just get through it. Not every day has to be your best one. I'll still be proud of you on the ordinary, tired ones.", sign: "forever" },
+  { body: "There's a particular kind of comfort in knowing you're out there working hard on your own dreams. I hope today gives you a little of that comfort back.", sign: "always yours" },
+  { body: "You don't owe anyone constant progress. Some days are for planting seeds you won't see grow yet. Trust the process, and trust yourself — I already do.", sign: "with everything I have" },
+  { body: "I hope you remember to eat something today, and drink water, and maybe step outside for a minute. Taking care of you matters just as much as the studying does.", sign: "your biggest fan" },
+  { body: "Whatever chapter you're stuck on right now, I promise it will make sense eventually. You've cracked harder things before. I have zero doubt you'll crack this one too.", sign: "always" },
+  { body: "I like thinking about the version of you a few years from now, looking back at days like this one, proud of how hard you tried. That version already exists in my mind.", sign: "yours completely" },
+  { body: "You're allowed to be tired and still be doing amazingly. Those two things aren't opposites. Rest a little today if you can — I'll still be cheering for you either way.", sign: "with love, always" },
+  { body: "Something about your determination has always stood out to me. Not the loud kind, the quiet steady kind that just keeps going. I hope today rewards that quiet effort.", sign: "forever yours" },
+  { body: "A gentle thought for your afternoon: you're not behind, you're not failing, you're just in the middle of something that takes time. I trust the middle of your story completely.", sign: "always" },
+  { body: "I hope your notes come together more easily than they feel right now, and that tonight you get to rest without guilt. You've earned rest just by trying today.", sign: "with all my heart" },
+  { body: "Even on your slower days, you're still moving forward — just at your own pace, which is the only pace that actually matters. I'll be here rooting for you regardless.", sign: "yours" },
+  { body: "It's easy to only notice the big milestones, but I see the small daily effort too — the flashcards, the late nights, the trying again. None of it goes unnoticed by me.", sign: "always yours" },
+  { body: "I hope today has at least one moment that feels lighter than the rest. And if it doesn't, tomorrow gets another chance, and I'll still be proud of you either way.", sign: "with love" },
+  { body: "You carry your responsibilities with more grace than you probably realize. I hope today, even briefly, you get to put some of that weight down and just breathe.", sign: "forever" },
+  { body: "There's no version of today where I'm not thinking well of you. Good study session or rough one, my pride in you doesn't move. You can just focus on the work.", sign: "your biggest fan" },
+  { body: "I hope the material clicks a little easier today, and if it doesn't, I hope you're gentle with yourself about it. Understanding takes the time that it takes.", sign: "always" },
+  { body: "You've built more discipline than you give yourself credit for. Showing up on the hard days, over and over, is its own kind of strength. I admire that in you constantly.", sign: "with everything I have" },
+  { body: "Sending you a small reminder in the middle of your day: you are enough, exactly as you are right now, unfinished assignments and all. The rest will come.", sign: "yours completely" },
+  { body: "I hope today teaches you something you didn't know yesterday, even something small. That's really all learning ever asks of you — one small thing at a time.", sign: "always yours" },
+  { body: "You make hard weeks look survivable just by getting through them the way you do — steadily, honestly, without giving up. That means more to me than you know.", sign: "with love, always" },
+  { body: "If your energy is low today, that's alright. You don't have to run at full speed constantly to be doing well. Slow and steady still counts, and I still see it.", sign: "forever yours" },
+  { body: "I hope you catch a small win today, even a tiny one — a paragraph that finally makes sense, a page finished, anything. Small wins add up to big ones eventually.", sign: "always" },
+  { body: "You've never needed to be perfect for me to be proud of you. Just keep trying the way you do, and let the results be whatever they turn out to be.", sign: "with all my heart" },
+  { body: "I hope today feels a little less heavy than yesterday did. And if it doesn't, know that someone out here believes fully in your ability to get through it.", sign: "yours" },
+  { body: "You handle pressure with more patience than most people I know. I hope today gives you a bit of that patience back, in whatever small way it can.", sign: "always yours" },
+  { body: "There's something quietly impressive about watching you keep choosing to try, day after day, even when it's not easy. I notice it, and I'm proud of it.", sign: "with love" },
+  { body: "I hope your focus holds today, and if it wanders, that's human — not a failure. Come back to the page whenever you're ready. There's no rush that matters more than you.", sign: "forever" },
+  { body: "You're building something real with all this effort, even on the days it doesn't feel like progress. I trust that more than I trust most things.", sign: "your biggest fan" },
+  { body: "Today, I hope you remember that struggling with something doesn't mean you're bad at it — it usually just means you're learning it. Keep going, gently.", sign: "always" },
+  { body: "No matter how today's studying goes, I want you to know that watching you chase your goals is one of my favorite things. Keep going — I'm right here.", sign: "with all my heart" },
+  { body: "I hope today gives you a moment to just sit still for a second, without a task attached to it. You're allowed to simply exist for a while, not just produce.", sign: "always" },
+  { body: "You have a way of turning effort into something quietly beautiful, even when it doesn't feel that way from the inside. I hope you can see it the way I do.", sign: "yours" },
+  { body: "If today's work feels like too much, remember you don't have to finish everything at once. One task, then the next. That's how all of it eventually gets done.", sign: "with love" },
+  { body: "I hope you're proud of yourself today, even a little. You've earned that, more often than you probably give yourself credit for.", sign: "always yours" },
+  { body: "There's a version of today where nothing goes as planned, and you're still doing okay. I hope that's the version you get, if any version has to be imperfect.", sign: "forever" },
+  { body: "You make it look easy to care this much about your future, even when it clearly isn't. I hope today rewards that care in some small, tangible way.", sign: "your biggest fan" },
+  { body: "I hope the hours pass kindly today, and that whatever you're learning starts to feel a little more familiar by the time you close your books.", sign: "with everything I have" },
+  { body: "Whatever today asks of you, I hope you have enough left in you to give it — and if you don't, I hope you forgive yourself for that too.", sign: "always" },
+  { body: "You're someone who tries, really tries, even when it's inconvenient or tiring. That's rarer than people think, and I notice it in you all the time.", sign: "yours completely" },
+  { body: "I hope you take today at your own pace, not anyone else's. Comparison rarely tells the truth about how well you're actually doing.", sign: "with love, always" },
+  { body: "Some days deserve gold stars, and some days just deserve a quiet acknowledgment that you showed up anyway. Either way, today counts.", sign: "forever yours" },
+  { body: "I hope your studying feels less like a mountain today and more like a series of small, doable steps. You're better at this than you think.", sign: "always" },
+  { body: "You deserve a soft landing at the end of today, whatever the day held. I hope you find one, even if it's just a warm drink and some quiet.", sign: "with all my heart" },
+  { body: "I keep noticing how much care you put into things that matter to you. Today is no exception, even if it doesn't feel especially remarkable while you're in it.", sign: "yours" },
+  { body: "If your motivation is running low today, that's alright — motivation comes and goes, but you keep showing up regardless. That consistency is the real strength.", sign: "always yours" },
+  { body: "I hope today has fewer obstacles than yesterday, and if it doesn't, I hope you remember how capable you've proven yourself to be already.", sign: "with love" },
+  { body: "You don't need today to be a triumph. Getting through it steadily is its own quiet kind of success, and I see it as one.", sign: "your biggest fan" },
+  { body: "I hope somewhere today you get a small reminder that you're doing better than you feel like you are. Progress is sneaky like that — it hides in plain sight.", sign: "with everything I have" },
+  { body: "You're allowed to feel behind and still be exactly on track. Those feelings and facts don't always agree, and that's okay.", sign: "always" },
+  { body: "I hope today's work feels a little lighter knowing someone out here is proud of you regardless of the outcome. You don't have to earn that pride — you already have it.", sign: "yours completely" },
+  { body: "There's something steady and reassuring about the way you keep going, week after week. I hope today gives you a bit of that same steadiness back.", sign: "forever" },
+  { body: "I hope your brain cooperates today, but if it doesn't, that's just how some days go. Tomorrow gets a fresh page, and so do you.", sign: "with love, always" },
+  { body: "You handle uncertainty better than you think you do. I hope today, whatever it brings, proves that to you a little more.", sign: "always yours" },
+  { body: "I hope you remember today that effort still counts even when the results are slow to show up. You're planting things that will grow later.", sign: "forever yours" },
+  { body: "Whatever today's challenges are, I hope you meet them with the same quiet determination I've always admired in you.", sign: "with all my heart" },
+  { body: "You are not required to have today figured out by tonight. Some things take longer, and that's not a flaw in you — it's just how learning works.", sign: "yours" },
+  { body: "I hope today includes at least one moment where you feel a little proud of yourself, even briefly. You deserve that recognition, from yourself especially.", sign: "always" },
+  { body: "You've never had to convince me you're trying hard enough. I see it plainly, in the little things as much as the big ones.", sign: "with love" },
+  { body: "I hope your energy holds up today, and that the parts of studying that usually frustrate you go a little more smoothly than expected.", sign: "your biggest fan" },
+  { body: "There's a kind of quiet bravery in continuing to try at something difficult. I hope today you feel a little of that bravery in yourself.", sign: "with everything I have" },
+  { body: "I hope today doesn't feel as heavy by the time it ends as it did when it started. Small shifts count, even ones you can't fully explain.", sign: "always yours" },
+  { body: "You're doing something genuinely hard, and doing it while still being kind, curious, and thoughtful. That combination isn't common, and I notice it in you.", sign: "yours completely" },
+  { body: "I hope today teaches you to be a little gentler with yourself, the way you're often gentle with everyone else.", sign: "forever" },
+  { body: "Whatever gets finished today, or doesn't, I want you to know my pride in you isn't tied to a checklist. It's just there, steady, regardless.", sign: "with all my heart" },
+  { body: "I hope the version of today you get is one where things click, but if it isn't, I hope you remember that not clicking yet doesn't mean never.", sign: "always" },
+  { body: "You carry a lot quietly, and I don't think you get enough credit for how well you manage it. I hope today gives you a little more ease than usual.", sign: "with love, always" },
+  { body: "I hope studying today feels less like a burden and more like just another step toward something you actually want. Because it is.", sign: "yours" },
+  { body: "There's no timeline you're required to meet except the one that actually works for you. I hope today respects that pace, whatever it looks like.", sign: "always yours" },
+  { body: "I hope you find something today, even something small, that reminds you why you started this in the first place.", sign: "forever yours" },
+  { body: "You are allowed to rest without guilt today. Productivity isn't the only measure of a good day, and I hope you remember that.", sign: "with everything I have" }
+];
+
+function dayOfYear(d){
+  const start = new Date(d.getFullYear(), 0, 0);
+  const diff = d - start;
+  return Math.floor(diff / 86400000);
+}
+
+function findSpecialLetterForToday(){
+  const today = todayISO();
+  const mmdd = today.slice(5); // MM-DD
+  return state.specialLetters.find(sp=>{
+    if(sp.recurring) return sp.date.slice(5) === mmdd;
+    return sp.date === today;
+  });
+}
+
+function renderTodaysLetter(){
+  const now = new Date();
+  const panel = document.getElementById('letterPanel');
+  const special = findSpecialLetterForToday();
+  document.getElementById('letterDate').textContent = now.toLocaleDateString(undefined, { weekday:'long', month:'long', day:'numeric' });
+
+  if(special){
+    panel.classList.add('is-special');
+    document.getElementById('letterHeading').textContent = 'A Special Day';
+    document.getElementById('letterBody').textContent = special.body;
+    document.getElementById('letterSign').textContent = special.sign ? `— ${special.sign}` : '';
+  }else{
+    panel.classList.remove('is-special');
+    document.getElementById('letterHeading').textContent = "Today's Letter";
+    const idx = dayOfYear(now) % LOVE_LETTERS.length;
+    const letter = LOVE_LETTERS[idx];
+    document.getElementById('letterBody').textContent = letter.body;
+    document.getElementById('letterSign').textContent = `— ${letter.sign}`;
+  }
+  renderSpecialList();
+}
+
+function renderSpecialList(){
+  const list = document.getElementById('specialList');
+  list.innerHTML = '';
+  state.specialLetters
+    .slice()
+    .sort((a,b)=> a.date.slice(5).localeCompare(b.date.slice(5)))
+    .forEach(sp=>{
+      const d = new Date(sp.date + 'T00:00:00');
+      const label = d.toLocaleDateString(undefined, { month:'short', day:'numeric' }) + (sp.recurring ? ' (yearly)' : '');
+      const li = document.createElement('li');
+      li.innerHTML = `<span class="sp-info">${escapeHtml(label)}</span>`;
+      const delBtn = document.createElement('button');
+      delBtn.className = 'icon-btn';
+      delBtn.textContent = '✕';
+      delBtn.title = 'Remove';
+      delBtn.onclick = ()=>{
+        state.specialLetters = state.specialLetters.filter(x=>x.id!==sp.id);
+        saveState();
+        renderTodaysLetter();
+      };
+      li.appendChild(delBtn);
+      list.appendChild(li);
+    });
+}
+
+document.getElementById('specialToggleBtn').onclick = ()=>{
+  const form = document.getElementById('specialForm');
+  form.style.display = form.style.display === 'none' ? '' : 'none';
+};
+document.getElementById('cancelSpecialBtn').onclick = ()=>{
+  document.getElementById('specialForm').style.display = 'none';
+};
+document.getElementById('saveSpecialBtn').onclick = ()=>{
+  const date = document.getElementById('specialDate').value;
+  const recurring = document.getElementById('specialRecurring').checked;
+  const body = document.getElementById('specialBody').value.trim();
+  const sign = document.getElementById('specialSign').value.trim();
+  if(!date || !body) return;
+  state.specialLetters.push({ id: uid(), date, recurring, body, sign });
+  document.getElementById('specialDate').value = '';
+  document.getElementById('specialBody').value = '';
+  document.getElementById('specialSign').value = '';
+  document.getElementById('specialForm').style.display = 'none';
+  saveState();
+  renderTodaysLetter();
+};
+
+loadState();
+renderTodaysLetter();
+</script>
+</body>
+</html>
