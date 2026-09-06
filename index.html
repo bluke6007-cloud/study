@@ -231,6 +231,15 @@ body{
 .subject-item.active:hover{ background: #612a53; }
 .dot{ width:9px; height:9px; border-radius:50%; flex-shrink:0; }
 .subject-item .name{ flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.subject-quiz-btn{
+  background:none; border:none; cursor:pointer;
+  font-size:12px; padding:2px 3px; border-radius:5px;
+  opacity:0.55;
+  transition: opacity 0.15s ease, background 0.15s ease, transform 0.15s ease;
+  flex-shrink:0;
+}
+.subject-quiz-btn:hover{ opacity:1; background: rgba(74,33,64,0.1); transform: scale(1.12); }
+.subject-item.active .subject-quiz-btn:hover{ background: rgba(255,255,255,0.15); }
 .subject-item .count{
   font-family:'IBM Plex Mono', monospace;
   font-size:11px;
@@ -596,6 +605,54 @@ textarea{ resize:vertical; min-height:70px; font-family:'Work Sans'; }
 .notes-grid{
   display:grid; grid-template-columns: repeat(auto-fill, minmax(230px,1fr)); gap:14px;
 }
+
+/* ---------- MATERIALS ---------- */
+.materials-header-actions{ display:flex; gap:8px; }
+.csv-hint{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:11px;
+  color: var(--ink-soft);
+  margin: -6px 0 14px;
+  line-height:1.6;
+}
+.csv-hint code{
+  background: var(--paper-dim);
+  padding:1px 5px;
+  border-radius:4px;
+  font-size:10.5px;
+}
+.material-form{
+  display:grid; gap:8px;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  align-items:end;
+  margin-bottom:16px;
+  padding-bottom:16px;
+  border-bottom:1px dashed var(--line);
+}
+@media (max-width:640px){ .material-form{ grid-template-columns:1fr; } }
+.materials-list{ display:flex; flex-direction:column; gap:10px; }
+.material-card{
+  display:flex; align-items:flex-start; gap:12px;
+  background: var(--paper);
+  border-radius:8px;
+  padding:12px 14px;
+  border-left: 4px solid var(--sage);
+  transition: background 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+}
+.material-card:hover{ background: var(--paper-dim); box-shadow: 0 3px 10px rgba(74,33,64,0.08); transform: translateY(-1px); }
+.material-icon{
+  font-size:18px; flex-shrink:0; margin-top:1px;
+}
+.material-main{ flex:1; min-width:0; }
+.material-title-row{ display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+.material-title{
+  font-weight:600; font-size:14.5px; color:var(--ink);
+  text-decoration:none;
+}
+a.material-title:hover{ text-decoration:underline; }
+.material-desc{ font-size:12.5px; color:var(--ink-soft); margin:4px 0 0; line-height:1.5; }
+.material-actions{ flex-shrink:0; display:flex; align-items:center; gap:4px; }
+
 .note-card{
   background: var(--paper);
   border-radius:8px;
@@ -623,12 +680,6 @@ textarea{ resize:vertical; min-height:70px; font-family:'Work Sans'; }
 .note-card .note-actions{
   position:absolute; top:10px; right:10px; display:flex; gap:4px;
 }
-.note-card .quiz-icon-btn{
-  background:none; border:none; cursor:pointer; color:var(--ink-soft); font-size:13px; padding:3px;
-  border-radius:5px;
-  transition: color 0.15s ease, background 0.15s ease, transform 0.15s ease;
-}
-.note-card .quiz-icon-btn:hover{ color: var(--ink); background: rgba(74,33,64,0.08); transform: scale(1.1); }
 
 /* ---------- QUIZ PROMPT BANNER ---------- */
 .quiz-prompt{
@@ -643,34 +694,17 @@ textarea{ resize:vertical; min-height:70px; font-family:'Work Sans'; }
 }
 .quiz-prompt-actions{ display:flex; gap:8px; }
 
-/* ---------- QUIZ MODAL ---------- */
-.modal-overlay{
-  position:fixed; inset:0;
-  background: rgba(43,20,38,0.45);
-  display:flex; align-items:center; justify-content:center;
-  z-index:100;
-  padding:20px;
-}
-.modal-card{
-  background: var(--chalk);
-  border-radius: 14px;
-  padding: 22px 24px;
-  max-width: 520px;
-  width: 100%;
-  max-height: 82vh;
-  overflow-y: auto;
-  box-shadow: 0 20px 50px -12px rgba(43,20,38,0.5);
-}
-.modal-head{
-  display:flex; align-items:center; justify-content:space-between; gap:12px;
-  margin-bottom:4px;
-}
-.modal-head h3{
-  font-family:'Fraunces', serif; font-weight:600; font-size:20px; margin:0;
-}
+/* ---------- QUIZ TAB ---------- */
 .quiz-subhead{
   font-size:13px; color:var(--ink-soft); margin:2px 0 16px;
 }
+.quiz-controls{
+  display:flex; align-items:end; gap:10px; flex-wrap:wrap;
+  margin-bottom:18px;
+  padding-bottom:18px;
+  border-bottom: 1px dashed var(--line);
+}
+.quiz-controls .field{ min-width:180px; }
 .quiz-question{
   margin-bottom:16px;
   padding-bottom:16px;
@@ -875,6 +909,8 @@ textarea{ resize:vertical; min-height:70px; font-family:'Work Sans'; }
         <div class="tab active" data-tab="deadlines">Deadlines</div>
         <div class="tab" data-tab="calendar">Calendar</div>
         <div class="tab" data-tab="notes">Notes</div>
+        <div class="tab" data-tab="materials">Materials</div>
+        <div class="tab" data-tab="quiz">Quiz</div>
       </div>
 
       <div class="panel" id="searchResultsPanel" style="display:none;">
@@ -882,6 +918,7 @@ textarea{ resize:vertical; min-height:70px; font-family:'Work Sans'; }
           <h3>Search results</h3>
         </div>
         <div id="searchDeadlineResults"></div>
+        <div id="searchMaterialResults" class="materials-list" style="margin-top:10px;"></div>
         <div id="searchNoteResults" class="notes-grid" style="margin-top:10px;"></div>
         <div class="empty-state" id="searchEmptyState" style="display:none;">
           <span class="big">No matches</span>Try a different search term.
@@ -940,7 +977,6 @@ textarea{ resize:vertical; min-height:70px; font-family:'Work Sans'; }
       <div class="panel" id="notesPanel" style="display:none;">
         <div class="panel-head">
           <h3>Notes</h3>
-          <button class="btn ghost small" id="quizMeBtn">Quiz me on this</button>
         </div>
         <div class="quiz-prompt" id="quizPrompt" style="display:none;">
           <span id="quizPromptText"></span>
@@ -966,23 +1002,68 @@ textarea{ resize:vertical; min-height:70px; font-family:'Work Sans'; }
         </div>
         <div class="notes-grid" id="notesGrid"></div>
       </div>
-    </div>
-  </div>
-</div>
 
-<div class="modal-overlay" id="quizOverlay" style="display:none;">
-  <div class="modal-card">
-    <div class="modal-head">
-      <h3 id="quizTitle">Quick Quiz</h3>
-      <button class="icon-btn" id="quizCloseBtn" title="Close">✕</button>
+      <div class="panel" id="materialsPanel" style="display:none;">
+        <div class="panel-head">
+          <h3>Study Materials</h3>
+          <div class="materials-header-actions">
+            <button class="btn ghost small" id="importCsvBtn">Import CSV</button>
+            <input type="file" id="csvFileInput" accept=".csv,text/csv" style="display:none;">
+          </div>
+        </div>
+        <p class="csv-hint">CSV columns: <code>title</code> (required), <code>subject</code>, <code>type</code> (link/video/pdf/book/other), <code>url</code>, <code>description</code>.</p>
+        <div class="material-form">
+          <div class="field">
+            <label>Title</label>
+            <input type="text" id="matTitle" placeholder="e.g. Chapter 4 slides" maxlength="70">
+          </div>
+          <div class="field">
+            <label>Subject</label>
+            <select id="matSubject"></select>
+          </div>
+          <div class="field">
+            <label>Type</label>
+            <select id="matType">
+              <option value="link">Link / Website</option>
+              <option value="video">Video</option>
+              <option value="pdf">PDF / Document</option>
+              <option value="book">Book / Textbook</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+          <div class="field" style="grid-column: 1 / -1;">
+            <label>Link (optional)</label>
+            <input type="text" id="matUrl" placeholder="https://…">
+          </div>
+          <div class="field" style="grid-column: 1 / -1;">
+            <label>Notes (optional)</label>
+            <textarea id="matDescription" placeholder="What is this / why it's useful…"></textarea>
+          </div>
+          <button class="btn" id="addMaterialBtn">Add material</button>
+        </div>
+        <div class="materials-list" id="materialsList"></div>
+      </div>
+
+      <div class="panel" id="quizPanel" style="display:none;">
+        <div class="panel-head">
+          <h3>Quiz</h3>
+        </div>
+        <p class="quiz-subhead">Pick a subject and it'll build a quick quiz from everything you've noted for it. Fill in the blanks, then check yourself.</p>
+        <div class="quiz-controls">
+          <div class="field">
+            <label>Subject</label>
+            <select id="quizSubjectSelect"></select>
+          </div>
+          <button class="btn" id="quizGenerateBtn">Generate quiz</button>
+        </div>
+        <div id="quizBody"></div>
+        <div class="quiz-actions" id="quizActionsRow" style="display:none;">
+          <button class="btn" id="quizCheckBtn">Check answers</button>
+          <button class="btn ghost" id="quizRegenBtn">New questions</button>
+        </div>
+        <div id="quizScore" class="quiz-score" style="display:none;"></div>
+      </div>
     </div>
-    <p class="quiz-subhead">Fill in the missing word from your own notes, then check yourself.</p>
-    <div id="quizBody"></div>
-    <div class="quiz-actions">
-      <button class="btn" id="quizCheckBtn">Check answers</button>
-      <button class="btn ghost" id="quizRegenBtn">New questions</button>
-    </div>
-    <div id="quizScore" class="quiz-score" style="display:none;"></div>
   </div>
 </div>
 
@@ -1000,6 +1081,7 @@ let state = {
   subjects: [],
   deadlines: [],
   notes: [],
+  materials: [],
   moods: {},
   streak: { count: 0, lastDate: null },
   specialLetters: [],
@@ -1024,6 +1106,7 @@ function loadState(){
       state.subjects = parsed.subjects || [];
       state.deadlines = parsed.deadlines || [];
       state.notes = parsed.notes || [];
+      state.materials = parsed.materials || [];
       state.moods = parsed.moods || {};
       state.streak = parsed.streak || { count: 0, lastDate: null };
       state.specialLetters = parsed.specialLetters || [];
@@ -1066,6 +1149,7 @@ function saveState(){
       subjects: state.subjects,
       deadlines: state.deadlines,
       notes: state.notes,
+      materials: state.materials,
       moods: state.moods,
       streak: state.streak,
       specialLetters: state.specialLetters
@@ -1108,6 +1192,7 @@ function render(){
   renderNextDeadline();
   renderDeadlines();
   renderNotes();
+  renderMaterials();
   renderMood();
   renderStreak();
   if(document.getElementById('calendarPanel').style.display !== 'none'){
@@ -1178,16 +1263,30 @@ function renderSubjectSidebar(){
 
   state.subjects.forEach(s=>{
     const count = state.deadlines.filter(d=>d.subjectId===s.id && !d.done).length;
+    const noteCount = state.notes.filter(n=>n.subjectId===s.id).length;
     const li = document.createElement('li');
     li.className = 'subject-item' + (state.activeSubject===s.id ? ' active':'');
-    li.innerHTML = `<span class="dot" style="background:${s.color}"></span><span class="name">${escapeHtml(s.name)}</span><span class="count">${count||''}</span>`;
+    li.innerHTML = `
+      <span class="dot" style="background:${s.color}"></span>
+      <span class="name">${escapeHtml(s.name)}</span>
+      ${noteCount > 0 ? `<button class="subject-quiz-btn" title="Quiz me on ${escapeHtml(s.name)}">📝</button>` : ''}
+      <span class="count">${count||''}</span>
+    `;
     li.onclick = ()=>{ state.activeSubject = s.id; render(); };
+    const quizBtn = li.querySelector('.subject-quiz-btn');
+    if(quizBtn){
+      quizBtn.onclick = (e)=>{
+        e.stopPropagation();
+        activateTab('quiz');
+        generateQuizForSubject(s.id);
+      };
+    }
     list.appendChild(li);
   });
 }
 
 function renderSubjectSelects(){
-  ['dlSubject','noteSubject'].forEach(id=>{
+  ['dlSubject','noteSubject','quizSubjectSelect','matSubject'].forEach(id=>{
     const sel = document.getElementById(id);
     const prev = sel.value;
     sel.innerHTML = state.subjects.map(s=>`<option value="${s.id}">${escapeHtml(s.name)}</option>`).join('');
@@ -1277,16 +1376,12 @@ function renderNotes(){
     if(subj) card.style.borderTopColor = subj.color;
     card.innerHTML = `
       <div class="note-actions">
-        <button class="quiz-icon-btn" title="Quiz me on this note">📝</button>
         <button class="icon-btn" title="Delete">✕</button>
       </div>
       ${subj ? `<span class="subj-chip" style="background:${subj.color}">${escapeHtml(subj.name)}</span>` : ''}
       <h4>${escapeHtml(n.title)}</h4>
       <p>${escapeHtml(n.body)}</p>
     `;
-    card.querySelector('.quiz-icon-btn').onclick = ()=>{
-      openQuiz([n], `Quiz: ${n.title}`);
-    };
     card.querySelector('.icon-btn').onclick = ()=>{
       state.notes = state.notes.filter(x=>x.id!==n.id);
       saveState(); render();
@@ -1299,6 +1394,62 @@ function escapeHtml(str){
   const div = document.createElement('div');
   div.textContent = str ?? '';
   return div.innerHTML;
+}
+
+const MATERIAL_ICONS = {
+  link: '🔗',
+  video: '🎥',
+  pdf: '📄',
+  book: '📚',
+  other: '🗂️'
+};
+
+function normalizeUrl(url){
+  if(!url) return '';
+  if(/^https?:\/\//i.test(url)) return url;
+  return `https://${url}`;
+}
+
+function renderMaterials(){
+  const container = document.getElementById('materialsList');
+  container.innerHTML = '';
+  let items = state.materials.slice();
+  if(state.activeSubject !== 'all') items = items.filter(m=>m.subjectId===state.activeSubject);
+  items.sort((a,b)=> (b.createdAt||0) - (a.createdAt||0));
+
+  if(items.length === 0){
+    container.innerHTML = `<div class="empty-state"><span class="big">Nothing here yet</span>Add links, videos, or PDFs for quicker access later.</div>`;
+    return;
+  }
+
+  items.forEach(m=>{
+    const subj = subjectById(m.subjectId);
+    const card = document.createElement('div');
+    card.className = 'material-card';
+    if(subj) card.style.borderLeftColor = subj.color;
+    const icon = MATERIAL_ICONS[m.type] || MATERIAL_ICONS.other;
+    const titleHtml = m.url
+      ? `<a class="material-title" href="${escapeHtml(normalizeUrl(m.url))}" target="_blank" rel="noopener noreferrer">${escapeHtml(m.title)}</a>`
+      : `<span class="material-title">${escapeHtml(m.title)}</span>`;
+    card.innerHTML = `
+      <div class="material-icon">${icon}</div>
+      <div class="material-main">
+        <div class="material-title-row">
+          ${titleHtml}
+          ${subj ? `<span class="subj-chip" style="background:${subj.color}">${escapeHtml(subj.name)}</span>` : ''}
+        </div>
+        ${m.description ? `<p class="material-desc">${escapeHtml(m.description)}</p>` : ''}
+      </div>
+      <div class="material-actions">
+        <button class="icon-btn" title="Delete">✕</button>
+      </div>
+    `;
+    card.querySelector('.icon-btn').onclick = ()=>{
+      state.materials = state.materials.filter(x=>x.id!==m.id);
+      saveState(); render();
+    };
+    container.appendChild(card);
+  });
 }
 
 /* ---------- QUIZ GENERATOR ---------- */
@@ -1356,26 +1507,27 @@ function buildQuizFromNotes(notesArr){
 }
 
 let currentQuizQuestions = [];
-let currentQuizNotesArr = [];
+let currentQuizSubjectId = null;
 
-function openQuiz(notesArr, title){
-  currentQuizNotesArr = notesArr;
+function generateQuizForSubject(subjectId){
+  currentQuizSubjectId = subjectId;
+  document.getElementById('quizSubjectSelect').value = subjectId;
+  const notesArr = state.notes.filter(n => n.subjectId === subjectId);
   currentQuizQuestions = buildQuizFromNotes(notesArr);
-  document.getElementById('quizTitle').textContent = title;
   renderQuizQuestions();
   document.getElementById('quizScore').style.display = 'none';
-  document.getElementById('quizOverlay').style.display = 'flex';
 }
 
 function renderQuizQuestions(){
   const body = document.getElementById('quizBody');
+  const actionsRow = document.getElementById('quizActionsRow');
   body.innerHTML = '';
   if(currentQuizQuestions.length === 0){
-    body.innerHTML = `<div class="empty-state"><span class="big">Not quite enough yet</span>Add a little more detail to these notes, then try again.</div>`;
-    document.getElementById('quizCheckBtn').style.display = 'none';
+    body.innerHTML = `<div class="empty-state"><span class="big">Not quite enough yet</span>Add a little more detail to this subject's notes, then try again.</div>`;
+    actionsRow.style.display = 'none';
     return;
   }
-  document.getElementById('quizCheckBtn').style.display = '';
+  actionsRow.style.display = 'flex';
   currentQuizQuestions.forEach((q, i)=>{
     const div = document.createElement('div');
     div.className = 'quiz-question';
@@ -1387,6 +1539,15 @@ function renderQuizQuestions(){
     body.appendChild(div);
   });
 }
+
+document.getElementById('quizGenerateBtn').onclick = ()=>{
+  const subjectId = document.getElementById('quizSubjectSelect').value;
+  if(!subjectId){
+    alert('Add a subject first — quizzes are built from that subject\'s notes.');
+    return;
+  }
+  generateQuizForSubject(subjectId);
+};
 
 document.getElementById('quizCheckBtn').onclick = ()=>{
   let correctCount = 0;
@@ -1410,31 +1571,13 @@ document.getElementById('quizCheckBtn').onclick = ()=>{
 };
 
 document.getElementById('quizRegenBtn').onclick = ()=>{
-  currentQuizQuestions = buildQuizFromNotes(currentQuizNotesArr);
-  renderQuizQuestions();
-  document.getElementById('quizScore').style.display = 'none';
-};
-
-document.getElementById('quizCloseBtn').onclick = ()=>{
-  document.getElementById('quizOverlay').style.display = 'none';
-};
-
-document.getElementById('quizMeBtn').onclick = ()=>{
-  let notesArr = state.notes;
-  let title = 'Quiz: All notes';
-  if(state.activeSubject !== 'all'){
-    notesArr = state.notes.filter(n => n.subjectId === state.activeSubject);
-    const subj = subjectById(state.activeSubject);
-    title = `Quiz: ${subj ? subj.name : 'Notes'}`;
-  }
-  openQuiz(notesArr, title);
+  if(currentQuizSubjectId) generateQuizForSubject(currentQuizSubjectId);
 };
 
 document.getElementById('quizPromptYes').onclick = ()=>{
   const subjId = document.getElementById('quizPrompt').dataset.subjectId;
-  const notesArr = state.notes.filter(n => n.subjectId === subjId);
-  const subj = subjectById(subjId);
-  openQuiz(notesArr, `Quiz: ${subj ? subj.name : 'Notes'}`);
+  activateTab('quiz');
+  generateQuizForSubject(subjId);
   document.getElementById('quizPrompt').style.display = 'none';
 };
 document.getElementById('quizPromptNo').onclick = ()=>{
@@ -1456,6 +1599,7 @@ document.getElementById('exportBtn').onclick = ()=>{
     subjects: state.subjects,
     deadlines: state.deadlines,
     notes: state.notes,
+    materials: state.materials,
     moods: state.moods,
     streak: state.streak,
     specialLetters: state.specialLetters,
@@ -1480,6 +1624,8 @@ function performSearch(query){
   const deadlinesPanel = document.getElementById('deadlinesPanel');
   const calendarPanel = document.getElementById('calendarPanel');
   const notesPanel = document.getElementById('notesPanel');
+  const materialsPanel = document.getElementById('materialsPanel');
+  const quizPanel = document.getElementById('quizPanel');
 
   if(!q){
     searchPanel.style.display = 'none';
@@ -1489,6 +1635,8 @@ function performSearch(query){
     deadlinesPanel.style.display = which==='deadlines' ? '' : 'none';
     calendarPanel.style.display = which==='calendar' ? '' : 'none';
     notesPanel.style.display = which==='notes' ? '' : 'none';
+    materialsPanel.style.display = which==='materials' ? '' : 'none';
+    quizPanel.style.display = which==='quiz' ? '' : 'none';
     return;
   }
 
@@ -1496,6 +1644,8 @@ function performSearch(query){
   deadlinesPanel.style.display = 'none';
   calendarPanel.style.display = 'none';
   notesPanel.style.display = 'none';
+  materialsPanel.style.display = 'none';
+  quizPanel.style.display = 'none';
   searchPanel.style.display = '';
 
   const matchedDeadlines = state.deadlines.filter(d => d.title.toLowerCase().includes(q));
@@ -1553,7 +1703,40 @@ function performSearch(query){
     noteContainer.appendChild(card);
   });
 
-  document.getElementById('searchEmptyState').style.display = (matchedDeadlines.length===0 && matchedNotes.length===0) ? '' : 'none';
+  const matchedMaterials = state.materials.filter(m =>
+    m.title.toLowerCase().includes(q) || (m.description||'').toLowerCase().includes(q)
+  );
+  const matContainer = document.getElementById('searchMaterialResults');
+  matContainer.innerHTML = '';
+  matchedMaterials.forEach(m=>{
+    const subj = subjectById(m.subjectId);
+    const card = document.createElement('div');
+    card.className = 'material-card';
+    if(subj) card.style.borderLeftColor = subj.color;
+    const icon = MATERIAL_ICONS[m.type] || MATERIAL_ICONS.other;
+    const titleHtml = m.url
+      ? `<a class="material-title" href="${escapeHtml(normalizeUrl(m.url))}" target="_blank" rel="noopener noreferrer">${escapeHtml(m.title)}</a>`
+      : `<span class="material-title">${escapeHtml(m.title)}</span>`;
+    card.innerHTML = `
+      <div class="material-icon">${icon}</div>
+      <div class="material-main">
+        <div class="material-title-row">
+          ${titleHtml}
+          ${subj ? `<span class="subj-chip" style="background:${subj.color}">${escapeHtml(subj.name)}</span>` : ''}
+        </div>
+        ${m.description ? `<p class="material-desc">${escapeHtml(m.description)}</p>` : ''}
+      </div>
+      <div class="material-actions"><button class="icon-btn" title="Delete">✕</button></div>
+    `;
+    card.querySelector('.icon-btn').onclick = ()=>{
+      state.materials = state.materials.filter(x=>x.id!==m.id);
+      saveState(); render(); performSearch(document.getElementById('searchInput').value);
+    };
+    matContainer.appendChild(card);
+  });
+
+  document.getElementById('searchEmptyState').style.display =
+    (matchedDeadlines.length===0 && matchedNotes.length===0 && matchedMaterials.length===0) ? '' : 'none';
 }
 
 document.getElementById('searchInput').addEventListener('input', (e)=>{
@@ -1589,37 +1772,162 @@ document.getElementById('addNoteBtn').onclick = ()=>{
   promptEl.style.display = 'flex';
 };
 
-const TAB_ORDER = ['deadlines', 'calendar', 'notes'];
+document.getElementById('addMaterialBtn').onclick = ()=>{
+  const title = document.getElementById('matTitle').value.trim();
+  const subjectId = document.getElementById('matSubject').value;
+  const type = document.getElementById('matType').value;
+  const url = document.getElementById('matUrl').value.trim();
+  const description = document.getElementById('matDescription').value.trim();
+  if(!title) return;
+  state.materials.push({ id: uid(), title, subjectId, type, url, description, createdAt: Date.now() });
+  document.getElementById('matTitle').value = '';
+  document.getElementById('matUrl').value = '';
+  document.getElementById('matDescription').value = '';
+  saveState(); render();
+};
+
+/* ---------- CSV IMPORT (Materials) ---------- */
+function parseCSV(text){
+  const rows = [];
+  let row = [];
+  let field = '';
+  let inQuotes = false;
+  for(let i = 0; i < text.length; i++){
+    const char = text[i];
+    const next = text[i+1];
+    if(inQuotes){
+      if(char === '"' && next === '"'){ field += '"'; i++; }
+      else if(char === '"'){ inQuotes = false; }
+      else{ field += char; }
+    }else{
+      if(char === '"'){ inQuotes = true; }
+      else if(char === ','){ row.push(field); field = ''; }
+      else if(char === '\n' || char === '\r'){
+        if(char === '\r' && next === '\n') i++;
+        row.push(field); field = '';
+        if(row.length > 1 || row[0].trim() !== ''){ rows.push(row); }
+        row = [];
+      }else{ field += char; }
+    }
+  }
+  if(field.length > 0 || row.length > 0){
+    row.push(field);
+    if(row.length > 1 || row[0].trim() !== ''){ rows.push(row); }
+  }
+  return rows;
+}
+
+const VALID_MATERIAL_TYPES = ['link','video','pdf','book','other'];
+
+function importMaterialsFromCSV(text){
+  const rows = parseCSV(text);
+  if(rows.length === 0) return { imported: 0, newSubjects: 0, error: 'The file looked empty.' };
+
+  const headers = rows[0].map(h => h.trim().toLowerCase());
+  const idx = {
+    title: headers.indexOf('title'),
+    subject: headers.indexOf('subject'),
+    type: headers.indexOf('type'),
+    url: headers.indexOf('url'),
+    description: headers.indexOf('description')
+  };
+  if(idx.title === -1){
+    return { imported: 0, newSubjects: 0, error: 'Your CSV needs at least a "title" column.' };
+  }
+
+  let importedCount = 0;
+  let newSubjectCount = 0;
+
+  for(let i = 1; i < rows.length; i++){
+    const r = rows[i];
+    const title = (r[idx.title] || '').trim();
+    if(!title) continue;
+
+    let subjectId;
+    const subjectName = idx.subject !== -1 ? (r[idx.subject] || '').trim() : '';
+    if(subjectName){
+      let subj = state.subjects.find(s => s.name.toLowerCase() === subjectName.toLowerCase());
+      if(!subj){
+        subj = { id: uid(), name: subjectName, color: COLORS[state.subjects.length % COLORS.length] };
+        state.subjects.push(subj);
+        newSubjectCount++;
+      }
+      subjectId = subj.id;
+    }else{
+      subjectId = state.subjects[0] ? state.subjects[0].id : '';
+    }
+
+    let type = idx.type !== -1 ? (r[idx.type] || '').trim().toLowerCase() : 'link';
+    if(!VALID_MATERIAL_TYPES.includes(type)) type = 'link';
+    const url = idx.url !== -1 ? (r[idx.url] || '').trim() : '';
+    const description = idx.description !== -1 ? (r[idx.description] || '').trim() : '';
+
+    state.materials.push({
+      id: uid(), title, subjectId, type, url, description,
+      createdAt: Date.now() - (rows.length - i)
+    });
+    importedCount++;
+  }
+  return { imported: importedCount, newSubjects: newSubjectCount };
+}
+
+document.getElementById('importCsvBtn').onclick = ()=>{
+  document.getElementById('csvFileInput').click();
+};
+document.getElementById('csvFileInput').addEventListener('change', (e)=>{
+  const file = e.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = (ev)=>{
+    const result = importMaterialsFromCSV(ev.target.result);
+    if(result.error){
+      alert(result.error);
+    }else if(result.imported === 0){
+      alert('No rows were imported — check that each row has a title.');
+    }else{
+      saveState(); render();
+      const subjMsg = result.newSubjects > 0 ? ` and created ${result.newSubjects} new subject${result.newSubjects===1?'':'s'}` : '';
+      alert(`Imported ${result.imported} material${result.imported===1?'':'s'}${subjMsg}.`);
+    }
+    e.target.value = '';
+  };
+  reader.onerror = ()=>{ alert('Could not read that file.'); };
+  reader.readAsText(file);
+});
+
+const TAB_ORDER = ['deadlines', 'calendar', 'notes', 'materials', 'quiz'];
 let currentTabIndex = 0;
 
-document.querySelectorAll('.tab').forEach(tab=>{
-  tab.onclick = ()=>{
-    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-    tab.classList.add('active');
-    const which = tab.dataset.tab;
-    const newIndex = TAB_ORDER.indexOf(which);
-    const direction = newIndex > currentTabIndex ? 'forward' : (newIndex < currentTabIndex ? 'backward' : null);
-    currentTabIndex = newIndex;
+function activateTab(which){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active', t.dataset.tab === which));
+  const newIndex = TAB_ORDER.indexOf(which);
+  const direction = newIndex > currentTabIndex ? 'forward' : (newIndex < currentTabIndex ? 'backward' : null);
+  currentTabIndex = newIndex;
 
-    const panelMap = {
-      deadlines: document.getElementById('deadlinesPanel'),
-      calendar: document.getElementById('calendarPanel'),
-      notes: document.getElementById('notesPanel')
-    };
-    Object.entries(panelMap).forEach(([key, el])=>{
-      el.classList.remove('page-turn-forward', 'page-turn-backward');
-      if(key === which){
-        el.style.display = '';
-        if(direction){
-          void el.offsetWidth; // force reflow so the animation can replay
-          el.classList.add(direction === 'forward' ? 'page-turn-backward' : 'page-turn-forward');
-        }
-      }else{
-        el.style.display = 'none';
-      }
-    });
-    if(which==='calendar') renderCalendar();
+  const panelMap = {
+    deadlines: document.getElementById('deadlinesPanel'),
+    calendar: document.getElementById('calendarPanel'),
+    notes: document.getElementById('notesPanel'),
+    materials: document.getElementById('materialsPanel'),
+    quiz: document.getElementById('quizPanel')
   };
+  Object.entries(panelMap).forEach(([key, el])=>{
+    el.classList.remove('page-turn-forward', 'page-turn-backward');
+    if(key === which){
+      el.style.display = '';
+      if(direction){
+        void el.offsetWidth; // force reflow so the animation can replay
+        el.classList.add(direction === 'forward' ? 'page-turn-backward' : 'page-turn-forward');
+      }
+    }else{
+      el.style.display = 'none';
+    }
+  });
+  if(which==='calendar') renderCalendar();
+}
+
+document.querySelectorAll('.tab').forEach(tab=>{
+  tab.onclick = ()=> activateTab(tab.dataset.tab);
 });
 
 /* ---------- CALENDAR ---------- */
