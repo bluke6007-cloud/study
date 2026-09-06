@@ -929,8 +929,22 @@ a.material-title:hover{ text-decoration:underline; }
 
   .letter-body{ font-size:14px; }
   .letter-sign{ font-size:19px; }
+  .letter-seal{ width:28px; height:28px; font-size:13px; top:-12px; right:12px; }
+
+  .next-deadline .count{ font-size:30px; }
+  .next-deadline .what{ font-size:16px; }
 
   .quiz-question{ margin-bottom:14px; padding-bottom:14px; }
+
+  .empty-state{ padding:26px 10px; }
+}
+
+/* Extra-narrow phones (iPhone SE and similar) */
+@media (max-width: 360px){
+  .board-title{ font-size: clamp(20px, 7.5vw, 26px); }
+  .tab{ padding:7px 11px; font-size:11px; }
+  .mood-btn{ width:32px; height:32px; font-size:16px; }
+  .letter-panel, .sidebar, .panel{ padding:12px; }
 }
 </style>
 </head>
