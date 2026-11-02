@@ -3277,6 +3277,17 @@ D.CAT1.t[1].q.push( {h:"Q6 Access and Excel (6)",c:"",p:[
 
 })();
 
+/* ===== ML PAPER 2: EASIER FORMULAS ===== */
+(function(){
+const f={
+"Units and conversions":"BIG unit → SMALL unit: multiply (× 1 000, × 100 or × 10)\nSMALL unit → BIG unit: divide\n°C → °F: multiply by 1.8, then add 32\n°F → °C: subtract 32, then divide by 1.8\nTrick: big to small gives a bigger number, small to big gives a smaller number.",
+"Perimeter, area and volume":"Perimeter = add up all the sides\nRectangle area = length × breadth\nTriangle area = ½ × base × height\nCircle area = π × radius × radius\nDistance around a circle = π × diameter\nBox volume = length × breadth × height\nCylinder volume = π × radius × radius × height\nTrick: radius = diameter ÷ 2. Use the π button on your calculator.",
+"Scale, maps and plans":"Real length = drawn length × scale number\nDrawn length = real length ÷ scale number\nThen change the units: cm ÷ 100 = m, cm ÷ 100 000 = km\nTrick: 'times' to go to real life, 'divide' to go back to the drawing.",
+"Probability: tree diagrams and two-way tables":"Probability = what you want ÷ all the possible outcomes\n'AND' (both happen): multiply\n'OR' (one or the other): add\nNOT happening = 1 − the probability\nExpected number = probability × number of tries\nTrick: the answer is never bigger than 1 and all the branches add up to 1."
+};
+D.ML2.n.forEach(function(n){ if(f[n[0]]) n[2]=f[n[0]]; });
+})();
+
 /* ===== DOWNLOAD PDF BUTTON ===== */
 function dlPdf(){
   const nm=(st.sub||"Notes")+(D[st.s]&&st.sub&&(PK[st.sub]||[]).length>1?" Paper "+((st.pi||0)+1):"")+" - notes";
@@ -3298,6 +3309,7 @@ function dlPdf(){
     t.insertAdjacentHTML("afterend",'<button class="p dlpdf no-print" onclick="dlPdf()">⬇ Download PDF</button><p class="mut no-print dlhint">In the window that opens, choose "Save as PDF" as the printer.</p>');
   };
 })();
+
 
 home();
 <\/script></body></html>
